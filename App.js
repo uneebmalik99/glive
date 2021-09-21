@@ -10,12 +10,15 @@ const App = () => {
     
  return (
      <NavigationContainer>
-         <Drawer.Navigator drawerContent={props => <DrawerContent { ...props}/>}>
+
+
+         <AppNavigator />
+         {/* <Drawer.Navigator drawerContent={props => <DrawerContent { ...props}/>}>
              
              
              <Drawer.Screen name='AppNavigator' component={AppNavigator} />
              
-              </Drawer.Navigator> 
+              </Drawer.Navigator>  */}
 
          
          

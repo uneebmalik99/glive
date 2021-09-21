@@ -35,6 +35,11 @@ import PaymentMethods from '../screens/PaymentMethods';
 import PaymentsTransactions from '../screens/PaymentsTransactions';
 import Messagecenter from '../screens/Messagecenter';
 import SavedProducts from '../screens/SavedProducts';
+import Discover from '../screens/Discover';
+import ProductDetails from '../screens/ProductDetails'
+import StreamWatching from '../screens/StreamWatching';
+
+
 const Stack = createStackNavigator();
  const Tab = createBottomTabNavigator();
 
@@ -462,13 +467,26 @@ options={{
 const AppNavigator = (props) => {
  return (
    <Stack.Navigator 
-   initialRouteName="TabScreen" 
+   initialRouteName="Discover" 
    
            screenOptions={{
              headerShown: false,
            }}
            >
-                      <Stack.Screen name="Homes" component={TabScreen} />
+
+          <Stack.Screen name="Discover" component={Discover} />
+          <Stack.Screen name="ProductDetails" component={ProductDetails} />
+          <Stack.Screen name="StreamWatching" component={StreamWatching} />
+
+          
+
+
+
+
+
+
+
+         <Stack.Screen name="Homes" component={TabScreen} />
 
          <Stack.Screen name="BottomTabs" component={BottomTabs} />
   
