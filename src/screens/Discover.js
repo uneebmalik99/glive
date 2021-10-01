@@ -64,7 +64,7 @@ function Discover({ item, navigation }) {
         }
 
     ])
-    const [Category , setCategory] = useState([
+    const [category , setcategory] = useState([
       {
         id:1,
         CategoryName:'Art & Crafts',
@@ -345,13 +345,20 @@ function Discover({ item, navigation }) {
         
 
      const Categorypressed=(item , id)=>{
-       let updateitem = [...Category];
-       let index1 = Category.findIndex(obj => obj.id == id)
-       alert(index1.id)
-      //  if(!!index1) {
-      //    updateitem[index1].active = 1;
-      //    setCategory(updateitem)
-      //  }
+         let updateitem = [...category];
+       let index1 = category.findIndex(obj => obj.id == id)
+      //  alert(index1)
+       if(!!index1) {
+         if(updateitem[index1].active == 1){
+          updateitem[index1].active = 0;
+          setcategory(updateitem)
+         }else{
+          updateitem[index1].active = 1;
+          setcategory(updateitem)
+
+         }
+         
+       }
 
      }   
 
@@ -519,15 +526,14 @@ function Discover({ item, navigation }) {
 
 const renderlist1 = ({ item, index }) => {
 
-     
   return(
       <TouchableOpacity 
       onPress={()=>{
-        Categorypressed(item.id)
+        Categorypressed(item, item.id)
       }}
-      style={styles.category_main}>
+      style={[styles.category_main,{backgroundColor:item.active == 1 ?Appcolors.purple:'white'}]}>
         
-        <Text style={{alignSelf:'center',fontSize:12, color:Appcolors.drakgrey}}>{item.CategoryName}</Text>
+        <Text style={{alignSelf:'center',fontSize:12, color:item.active == 1 ? 'white': Appcolors.drakgrey}}>{item.CategoryName}</Text>
 
       </TouchableOpacity>
 
@@ -610,7 +616,70 @@ const renderStreamlist = ({ item, index }) => {
         </View>
 
 
-        <View style={{width:'13%',}}>
+        <View style={{width:'15%',}}>
+      
+       </View>
+
+
+
+
+        <TouchableOpacity style={{width:'25%',height:'60%',alignItems:'center',justifyContent:'center', borderWidth:0.7, borderRadius:5, }}>
+
+        <Text style={{color:'black', fontSize:14}}>Follow</Text>
+
+        </TouchableOpacity>
+
+      </View>
+
+     
+
+      <View style={{backgroundColor:'#C4C4C4', height:200, width:'100%'}}>
+      <TouchableOpacity style={{backgroundColor:'white', justifyContent:'center',alignItems:'center',margin:15,right:10, borderRadius:500/2, position:'absolute', width:35,height:35}}>
+<Image  style={{alignSelf:'center', }} source={require('../images/Vector4.png')}/>
+</TouchableOpacity>
+      </View>
+      <View style={{paddingHorizontal:20, marginTop:5}}>
+      <Text style={{fontSize:16,color:Appcolors.drakgrey}}>Live Streamning titl very long long very long</Text>
+      </View>
+      </TouchableOpacity>
+
+  );
+
+
+
+}
+
+
+const renderChannellist = ({ item, index }) => {  
+  return(
+      <TouchableOpacity 
+      onPress={()=>{
+        navigation.navigate('ChannelDetails',{item : item})
+      }}
+      style={styles.StreamList_main}>
+        
+      <View style={{flexDirection:'row',paddingHorizontal:20, alignItems:'center', width:'100%', height:60,}}>
+       <View style={{width:'15%',}}>
+
+        <Image style={{width:50, height:50 , borderRadius:500/2}} source={require('../images/1.5.png')} />
+        
+        </View>
+
+
+        <View style={{width:'3%', backgroundColor:'grey'}}>
+
+        </View>
+
+
+        <View style={{width:'40%',}}>
+
+        <Text style={{color:'black', fontSize:18}}>Channel Name</Text>
+
+        <Text style={{fontSize:12, color:Appcolors.drakgrey}}>12 Min Ago Started</Text>
+        </View>
+
+
+        <View style={{width:'15%',}}>
       
        </View>
 
@@ -651,7 +720,7 @@ const renderStreamlist = ({ item, index }) => {
 
         <FlatList
               contentInsetAdjustmentBehavior="automatic"
-              data={Category}
+              data={category}
               horizontal={true}
               contentContainerStyle={{height:'80%',alignSelf:'center', paddingHorizontal:15,  }}
               renderItem={renderlist1}
@@ -687,7 +756,7 @@ const renderStreamlist = ({ item, index }) => {
 
         <FlatList
               contentInsetAdjustmentBehavior="automatic"
-              data={Category}
+              data={category}
               horizontal={true}
               contentContainerStyle={{height:'80%',alignSelf:'center', paddingHorizontal:15,  }}
               renderItem={renderlist1}
@@ -723,7 +792,7 @@ const renderStreamlist = ({ item, index }) => {
 
       <FlatList
             contentInsetAdjustmentBehavior="automatic"
-            data={Category}
+            data={category}
             horizontal={true}
             contentContainerStyle={{height:'80%',alignSelf:'center', paddingHorizontal:15,  }}
             renderItem={renderlist1}
@@ -737,9 +806,9 @@ const renderStreamlist = ({ item, index }) => {
 
       <FlatList
             contentInsetAdjustmentBehavior="automatic"
-            data={Category}
+            data={Channel}
             contentContainerStyle={{width:'100%',paddingBottom:150, alignSelf:'center',   }}
-            renderItem={renderStreamlist}
+            renderItem={renderChannellist}
             keyExtractor={(item,id) => id.toString()}
             /> 
 
@@ -772,12 +841,14 @@ const _onRefresh = (callback) => {
 
       <Text style={styles.Header_txt}>Discover</Text>
 
-      <View style={{alignSelf:'center', }}>
+      <TouchableOpacity 
+      onPress={()=> {navigation.navigate('GuestProfileVS')}}
+      style={{alignSelf:'center', }}>
           
       <Image     style={{height:25 , width:25}} 
                       source={require('../images/Vectoraccount.png')} 
                       />
-      </View>
+      </TouchableOpacity>
 
       </Appbar>
 
@@ -793,7 +864,7 @@ const _onRefresh = (callback) => {
           <TextInput 
           placeholder='Search'
           placeholderTextColor={Appcolors.lightgrey}
-          style={{width:'90%', paddingLeft:5,height:'100%' }} />
+          style={{width:'90%', paddingLeft:5,height:'100%' , color:Appcolors.drakgrey}} />
           
           </View>
 
@@ -861,7 +932,6 @@ const styles = StyleSheet.create({
   elevation: 2,
  },
  category_main:{
-  backgroundColor:'white',
   justifyContent:'center',
   paddingHorizontal:20, 
   alignItems:'center',

@@ -38,6 +38,8 @@ import SavedProducts from '../screens/SavedProducts';
 import Discover from '../screens/Discover';
 import ProductDetails from '../screens/ProductDetails'
 import StreamWatching from '../screens/StreamWatching';
+import ChannelDetails from '../screens/ChannelDetails';
+import GuestProfileVS from '../screens/GuestProfileVS';
 
 
 const Stack = createStackNavigator();
@@ -477,8 +479,8 @@ const AppNavigator = (props) => {
           <Stack.Screen name="Discover" component={Discover} />
           <Stack.Screen name="ProductDetails" component={ProductDetails} />
           <Stack.Screen name="StreamWatching" component={StreamWatching} />
-
-          
+          <Stack.Screen name='ChannelDetails' component={ChannelDetails} />
+          <Stack.Screen name='GuestProfileVS' component={GuestProfileVS} />
 
 
 
