@@ -29,26 +29,16 @@ import CheckBox from '@react-native-community/checkbox';
 
 
 
-const Login = ({ navigation }) => {
+const Resetpassword = ({ navigation }) => {
 
   const [showpassword , setshowpassword] = useState(true)
+
+  const [showNewpassword , setshowNewpassword] = useState(true)
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
-   const [email , setemail] = useState('')
+   const [c_pass , setc_pass] = useState('')
    const [pass , setpass] = useState('')
-   const [text, setText] = React.useState('');
-  const [emailerror , setemailerror] = useState(false)
-  const login = () =>{ 
-    if(email == ''){
-      set
-
-    }else if(pass == ''){
-
-    }else{
-
-    }
-
-  }
+  
 
 
     return (
@@ -57,17 +47,15 @@ const Login = ({ navigation }) => {
 <Appbar style={styles.appbar}>
 
 <TouchableOpacity 
-onPress={()=> navigation.goBack()}
 
         style={{alignContent:"center", alignItems:"center"}}
 
 >
-    <Ionicons  name='chevron-back' size={30} color={Appcolors.drakgrey} />
 
       
     </TouchableOpacity>
 
-<Text style={styles.Header_txt}>Login</Text>
+<Text style={styles.Header_txt}>Reset Password</Text>
 
 <TouchableOpacity 
 style={{alignSelf:'center', }}>
@@ -80,14 +68,35 @@ style={{alignSelf:'center', }}>
 
         <View style={{paddingVertical:20,justifyContent:'center', paddingHorizontal:20}}>
         <TextInput
-      label="E-mail or Phone"
-      placeholder='E-mail or Phone'
+      label="New Password"
+      placeholder='New Password'
       mode='outlined'
       style={{height:50, }}
       theme={{  colors: { placeholder: Appcolors.txt_grey, text: 'black', primary: Appcolors.inputtxt_border_color_active,underlineColor:'transparent',background : 'white'}}}
-     
-      value={email}
-      onChangeText={text => setemail(text)}
+      secureTextEntry={showNewpassword}
+
+      value={pass}
+      onChangeText={text => setpass(text)}
+      right={
+        showNewpassword == true ?
+        
+      <TextInput.Icon
+      name="eye-outline"
+      style={{alignSelf:'center'}}
+        color={'grey'}
+        onPress={() => {
+            setshowNewpassword(false)
+        }}
+      />:
+      <TextInput.Icon
+      name="eye-off-outline"
+      style={{alignSelf:'center'}}
+      color={'grey'}
+      onPress={() => {
+          setshowNewpassword(true)
+      }}
+    />
+    }
       />
     {/* {emailerror == true ?
     <Text style={{color:'#FF155A',fontSize:15, marginTop:5,}}> This field is required</Text>
@@ -95,19 +104,20 @@ style={{alignSelf:'center', }}>
 
 
 <TextInput
-      label="Password"
-      placeholder='Password'
+      label="Confirm Password"
+      placeholder='Confirm Password'
       mode='outlined'
       style={{height:50, marginTop:20,}}
       theme={{  colors: { placeholder: Appcolors.txt_grey, text: 'black', primary: Appcolors.inputtxt_border_color_active,underlineColor:'transparent',background : 'white'}}}
       secureTextEntry={showpassword}
 
-      value={pass}
-      onChangeText={text => setpass(text)}
+      value={c_pass}
+      onChangeText={text => setc_pass(text)}
       right={
           showpassword == true ?
           
         <TextInput.Icon
+        onPress={()=> {alert('k')}}
         name="eye-outline"
         style={{alignSelf:'center'}}
           color={'grey'}
@@ -125,54 +135,21 @@ style={{alignSelf:'center', }}>
       />
       }
       />
-     
-
-        <View style={styles.container_2}>
-
-              <View style={{flexDirection:'row'}}>
-           <TouchableOpacity 
-           onPress={()=> {toggleCheckBox == true? setToggleCheckBox(false):setToggleCheckBox(true)}}
-           style={styles.CheckBox}>
-             {toggleCheckBox == true ? 
-             <Ionicons name='checkmark' style={{alignSelf:'center'}} color='#64DFDF' size={24}/>
-             :
-             <Ionicons name='checkmark' style={{alignSelf:'center'}} color='white' size={24}/>
-             }
-             </TouchableOpacity>
-              <Text style={styles.remember_txt}>
-                  Remember me
-                </Text>
-              </View>
-
-
-
-              <View style={{alignSelf:'center'}}>
-                <Text
-                onPress={()=> { navigation.navigate('Forgetpassword')}}
-                style={styles.Forgettxt}>
-                  Forget password?
-                </Text>
-              </View>
-        </View>
-
+  
 
 
 
 
 
           <TouchableOpacity 
-          onPress={()=>{ AppConstance.LOGIN = '1'; AppConstance.ROLE ='1', navigation.navigate('Setting')}}
-          style={[styles.login_btn,{ backgroundColor:email == '' || pass == ''? '#C4C4C4':'#64DFDF'        }]}>
+          onPress={()=>{ if(pass != '' && c_pass != ''){ navigation.navigate('Login')}}}
+          style={[styles.login_btn,{ backgroundColor: pass == '' || c_pass == ''? '#C4C4C4':'#64DFDF'        }]}>
 
-                <Text style={styles.btn_txt}>Log in</Text>
+                <Text style={styles.btn_txt}>Reset Password</Text>
 
             </TouchableOpacity>
 
 
-                <Text style={styles.dhaccount}>
-                  Don't have an account yet? <Text onPress={()=> {navigation.navigate('Register')}} style={{color:'#715DFF', fontWeight:'bold'}}>Register</Text>
-
-                </Text>
 
         </View>
 
@@ -191,7 +168,7 @@ style={{alignSelf:'center', }}>
     );
 }
 
-export default Login;
+export default Resetpassword;
 
 
 const styles = StyleSheet.create({

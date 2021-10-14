@@ -6,6 +6,10 @@ const Appcolors = {
     purple: '#715DFF',
     drakgrey: '#4A4A4A',
     lightgrey: '#C4C4C4',
+    txt_grey:'#A6A8BA',
+    inputtxt_border_color:'#E5E5E5',
+    inputtxt_border_color_active:'#715DFF',
+
     btnLoginColor: '#6658dd',
     transplant: '#00000000',
     textColor: 'black',

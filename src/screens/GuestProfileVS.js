@@ -83,16 +83,25 @@ const GuestProfileVS = ({route, navigation }) => {
 
         <View style={styles.body}>
               
-              <View style={{justifyContent:'center',width:'100%', height:'48%'}}>
-                <Image style={{ width:85, height:85, alignSelf:'center',borderRadius:500/2, }}resizeMethod='resize' resizeMode='stretch' source={require('../images/1.5.png')}/>
-                <Text style={{alignSelf:'center',fontSize:18, paddingVertical:10,}}>Viewer</Text>
+              <View style={{justifyContent:'center',width:'100%',alignItems:'center',height:'48%'}}>
+                <TouchableOpacity 
+                onPress={()=> {navigation.navigate('Login')}}
+                style={{justifyContent:'center',}}>
+                <Image style={{ width:110, height:110,margin:10, alignSelf:'center',borderRadius:500/2, }}resizeMethod='resize' resizeMode='stretch' source={require('../images/stream.png')}/>
+                <Text style={styles.txt}>Viewer</Text>
+                </TouchableOpacity>
                 </View>
 
 
 
-                <View style={{justifyContent:'center',width:'100%', height:'48%'}}>
-                <Image style={{ width:85, height:85, alignSelf:'center',borderRadius:500/2, }}resizeMethod='resize' resizeMode='stretch' source={require('../images/1.5.png')}/>
-                <Text style={{alignSelf:'center',fontSize:18, paddingVertical:10,}}>Streamer</Text>
+                <View style={{justifyContent:'center',width:'100%',alignItems:'center', height:'48%'}}>
+                <TouchableOpacity
+                onPress={()=> {navigation.navigate('Login')}}
+                style={{justifyContent:'center', }}>
+                <Image style={{ width:110, height:110, margin:10, alignSelf:'center',borderRadius:500/2, }}resizeMethod='resize' resizeMode='stretch' source={require('../images/viewer.png')}/>
+                <Text style={styles.txt}>Streamer</Text>
+                </TouchableOpacity>
+
                 </View>
 
 
@@ -140,12 +149,18 @@ const styles = StyleSheet.create({
   shadowRadius: 2.84,
   elevation: 2,
  },
+ txt:{
+  alignSelf:'center', 
+  fontSize:22,
+   paddingVertical:10,
+   color:Appcolors.drakgrey,
+ },
  body:{
   width:'100%',
   backgroundColor:'white',
   paddingHorizontal:0,
-  flex:1,
-  height:'100%',
+  height:'80%',
+  alignSelf:'center',
   justifyContent:'center'
  },
 

@@ -40,6 +40,9 @@ import ProductDetails from '../screens/ProductDetails'
 import StreamWatching from '../screens/StreamWatching';
 import ChannelDetails from '../screens/ChannelDetails';
 import GuestProfileVS from '../screens/GuestProfileVS';
+import Forgetpassword from '../screens/Forgetpassword';
+import Emailsent from '../screens/Emailsent';
+import Resetpassword from '../screens/Resetpassword';
 
 
 const Stack = createStackNavigator();
@@ -500,6 +503,13 @@ const AppNavigator = (props) => {
          {/* <Stack.Screen name='Events' component={Events}/> */}
          <Stack.Screen name="Register" component={Register} />
          <Stack.Screen name="Login" component={Login} />
+         <Stack.Screen name="Forgetpassword" component={Forgetpassword} />
+         <Stack.Screen name="Emailsent" component={Emailsent} />
+
+         <Stack.Screen name="Resetpassword" component={Resetpassword} />
+         
+         
+         
          <Stack.Screen name="BecomeSeller" component={BecomeSeller} />
 
 

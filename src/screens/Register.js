@@ -9,7 +9,6 @@ import {
     FlatList,
     ImageBackground,
     TouchableOpacity,
-    TextInput,
     Image,
     Button,
     SafeAreaView
@@ -22,7 +21,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommu
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import BottomTabs from './BottomTabs';
 import Feather from 'react-native-vector-icons/dist/Feather';
-import { Appbar, Card } from 'react-native-paper';
+import { Appbar, Card, TextInput, HelperText, } from 'react-native-paper';
+import Appcolors from '../AppColors/Appcolors.js';
+import CheckBox from '@react-native-community/checkbox';
 
 
 
@@ -30,170 +31,287 @@ import { Appbar, Card } from 'react-native-paper';
 
 const Register = ({ navigation }) => {
 
+  const [showpassword , setshowpassword] = useState(true)
+  const [showNewpassword , setshowNewpassword] = useState(true)
+  const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
-    const [showpassword , setshowpassword] = useState(true)
-    const [showConfirmpassword , setshowConfirmpassword] = useState(true)
-    const [filteredDataSource, setFilteredDataSource] = useState([
-    
-        {
-            id: 1,
-            category : 'Cosmetics'
-          },
-          {
-              id: 2,
-              category : 'Coffee'
-      
-             
-          },
-          {
-              id: 3,
-              category : 'Cool Stuff'
-          }
-           
-    
-    ]);
-    const [search ,setSearch]=useState('')
+    const [FirstName, setFirstName]= useState('')
+    const [F_error, setF_error]= useState(false)
+
+    const[LastName , setLastName] = useState('') 
+    const [L_error, setL_error]= useState(false)
+
+   const [email , setemail] = useState('')
+   const [E_error, setE_error]= useState(false)
+
+   const [pass , setpass] = useState('')
+   const [P_error, setP_error]= useState(false)
+
+   const [confirmpass , setconfirmpass] = useState('')
+   const [CP_error, setCP_error]= useState(false)
+
+   const [CPC_error, setCPC_error]= useState(false)
 
 
-const [Products, setProducts] = useState([
-    {
-      id: 1,
-      category : 'Cosmetics'
-    },
-    {
-        id: 2,
-        category : 'Coffee'
+   const [text, setText] = React.useState('');
+  const [emailerror , setemailerror] = useState(false)
+  const login = () =>{ 
+    if(email == ''){
+      set
 
-       
-    },
-    {
-        id: 3,
-        category : 'Cool Stuff'
+    }else if(pass == ''){
+
+    }else{
+
     }
-      
-  ]
-)
 
+  }
+
+const  proceed = ()=>{
+    if(FirstName == null || FirstName == ''){
+        setF_error(true)
+
+    }else if(LastName == null || LastName == ''){
+        setF_error(false)
+        setL_error(true)
+
+    }else if(email == null || email == ''){
+        setL_error(false)
+        setE_error(true)
+
+    }else if(pass == null || pass == ''){
+        setP_error(true)
+        setE_error(false)
+
+    }else if(confirmpass == null || confirmpass == ''){
+        setCP_error(true)
+        setP_error(false)
+
+    }else if(pass != confirmpass){
+        setCPC_error(true)
+        
+
+    }else{
+        setCP_error(false)
+        setCPC_error(false)
+        navigation.navigate('Login')
+    }
+
+
+
+     
+  }
 
     return (
-        <SafeAreaView style={{backgroundColor:"white", flex: 1 ,width:deviceWidth,height:deviceHeight}}>
+        <SafeAreaView style={{backgroundColor:"white", flex: 1 ,justifyContent:'center', width:deviceWidth,height:deviceHeight}}>
 
-<View style={{  width:'100%',height:deviceHeight*0.08,backgroundColor:'white', paddingHorizontal:13, flexDirection:'column'}}>
-  
-  <View style={{ width:'100%',height:deviceHeight*0.07,marginTop:5, flexDirection:'row'}}>
-  
-  <View style={{justifyContent:'center',width:'20%', height:'100%',}}>
-  
-          <TouchableOpacity
-                            style={{ alignSelf: 'flex-start', }}
-                            onPress={() => {
-            navigation.goBack();
-        }}
+<Appbar style={styles.appbar}>
 
-                        >
-                            <Ionicons name='chevron-back-outline' size={21}  />
-                            {/* <Image style={{ width: 21, height: 21, alignSelf: 'flex-start', resizeMode: 'contain' }} source={require('../images/Buttons_SideMenu.png')} /> */}
-                        </TouchableOpacity> 
-  
-  </View>
-  <View style={{justifyContent:'center',width:'60%',height:'100%',}}>
-  <Text style={{ alignSelf: 'center', textAlignVertical: 'center', fontSize: 18, fontWeight: 'bold' }}>Register as user</Text>
-  </View>
-  
-  <View style={{justifyContent:'center',width:'20%', height:'100%',}}>
-  <TouchableOpacity
+<TouchableOpacity 
+onPress={()=> navigation.goBack()}
 
-  
-  style={{ alignSelf: 'flex-end', marginLeft: 40 }}
+        style={{alignContent:"center", alignItems:"center"}}
 
-//    onPress={()=>
-//    navigation.navigate('EditGig')}
+>
+    <Ionicons  name='chevron-back' size={30} color={Appcolors.drakgrey} />
+
+      
+    </TouchableOpacity>
+
+<Text style={styles.Header_txt}>Register</Text>
+
+<TouchableOpacity 
+style={{alignSelf:'center', }}>
     
-                            >
-                                {/* <Entypo name='dots-three-vertical'  size={20}  color='black'/> */}
-            {/* <MaterialCommunityIcons name='bell-outline' size={20} color='#292F58' style={{marginRight:3}}/> */}
-                      </TouchableOpacity>
-  
-  </View>
-  
-  
-  
-  </View>
 
-  
-  
-           </View>
-    
+</TouchableOpacity>
+
+</Appbar>
+
+
         <View style={{paddingVertical:20,justifyContent:'center', paddingHorizontal:20}}>
-<TextInput 
-style={{height:40, borderRadius:12, borderWidth:0.4, paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-placeholder='Email'
-/>
+       
+        <TextInput
+            label="First Name"
+            placeholder='First Name'
+            mode='outlined'
+            style={{height:50,  }}
+            theme={{  colors: { placeholder: Appcolors.txt_grey, text: 'black', primary: Appcolors.inputtxt_border_color_active,underlineColor:'transparent',background : 'white'}}}           
+            value={FirstName}
+            onChangeText={text => setFirstName(text)}
+            />
 
-<View style={{flexDirection:'row',width:'100%',marginTop:10, borderRadius:12,height: Platform.OS == 'ios' ? deviceHeight*0.05 : deviceHeight*0.06,backgroundColor:'#D0D3D4',borderColor:'grey',  borderWidth:0.4, }}>
-<TextInput 
- secureTextEntry={showpassword}
+            {F_error == true ? 
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}>This field is reqiured </Text>
+            :
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}></Text>
+            }
 
-style={{height:'99%',width:'92%',alignSelf:'flex-start', paddingHorizontal:10 , }}
+        <TextInput
+            label="Last Name"
+            placeholder='Last Name'
+            mode='outlined'
+            style={{height:50,  }}
+            theme={{  colors: { placeholder: Appcolors.txt_grey, text: 'black', primary: Appcolors.inputtxt_border_color_active,underlineColor:'transparent',background : 'white'}}}
+            
+            value={LastName}
+            onChangeText={text => setLastName(text)}
+            />
 
-placeholder='Password'
+            {L_error == true ? 
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}>This field is reqiured </Text>
+            :
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}></Text>
+            }
+       
+       
+        <TextInput
+            label="E-mail or Phone"
+            placeholder='E-mail or Phone'
+            mode='outlined'
+            style={{height:50, }}
+            theme={{  colors: { placeholder: Appcolors.txt_grey, text: 'black', primary: Appcolors.inputtxt_border_color_active,underlineColor:'transparent',background : 'white'}}}
+            
+            value={email}
+            onChangeText={text => setemail(text)}
+            />
 
-/>
-
-{showpassword == false ?
-<TouchableOpacity 
-    style={{ justifyContent:'center', alignSelf:'center'}}
-    onPress={()=> setshowpassword(true)}>
-<Ionicons name='eye-outline' size={16} />
-</TouchableOpacity>
-:
-<TouchableOpacity 
-    style={{justifyContent:'center', alignSelf:'center'}}
-
-onPress={()=> setshowpassword(false)}>
-<Ionicons name='ios-eye-off-outline'  size={16} />
-</TouchableOpacity>
-}
-</View>
+            {E_error == true ? 
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}>This field is reqiured </Text>
+            :
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}></Text>
+            }
+ 
 
 
-<View style={{flexDirection:'row',width:'100%',marginTop:10, borderRadius:12,height: Platform.OS == 'ios' ? deviceHeight*0.05 : deviceHeight*0.06,backgroundColor:'#D0D3D4',borderColor:'grey',  borderWidth:0.4, }}>
+    <TextInput
+      label="Password"
+      placeholder='Password'
+      mode='outlined'
+      style={{height:50, }}
+      theme={{  colors: { placeholder: Appcolors.txt_grey, text: 'black', primary: Appcolors.inputtxt_border_color_active,underlineColor:'transparent',background : 'white'}}}
+      secureTextEntry={showpassword}
 
-<TextInput 
- secureTextEntry={showConfirmpassword}
+      value={pass}
+      onChangeText={text => setpass(text)}
+      right={
+          showpassword == true ?
+          
+        <TextInput.Icon
+        name="eye-outline"
+        style={{alignSelf:'center'}}
+          color={'grey'}
+          onPress={() => {
+              setshowpassword(false)
+          }}
+        />:
+        <TextInput.Icon
+        name="eye-off-outline"
+        style={{alignSelf:'center'}}
+        color={'grey'}
+        onPress={() => {
+            setshowpassword(true)
+        }}
+      />
+      }
+      />
 
- style={{height:'99%',width:'92%',alignSelf:'flex-start', paddingHorizontal:10 , }}
+            {P_error == true ? 
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}>This field is reqiured </Text>
+            :
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}></Text>
+            }
 
-placeholder='Confirm Password'
 
-/>
-{showConfirmpassword == false ?
-<TouchableOpacity
-        style={{ justifyContent:'center', alignSelf:'center'}}
 
-    onPress={()=> setshowConfirmpassword(true)}>
-<Ionicons name='eye-outline' size={16}/>
-</TouchableOpacity>
-:
-<TouchableOpacity 
-    style={{ justifyContent:'center', alignSelf:'center'}}
+        <TextInput
+            label="Confirm Password"
+            placeholder='Confirm Password'
+            mode='outlined'
+            style={{height:50,}}
+            theme={{  colors: { placeholder: Appcolors.txt_grey, text: 'black', primary: Appcolors.inputtxt_border_color_active,underlineColor:'transparent',background : 'white'}}}
+            secureTextEntry={showNewpassword}
 
-onPress={()=> setshowConfirmpassword(false)}>
-<Ionicons name='ios-eye-off-outline'  size={16}/>
-</TouchableOpacity>
-}
-</View>
-<TouchableOpacity 
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
+            value={confirmpass}
+            onChangeText={text => setconfirmpass(text)}
+            right={
+                showNewpassword == true ?
+                
+                <TextInput.Icon
+                name="eye-outline"
+                style={{alignSelf:'center'}}
+                color={'grey'}
+                onPress={() => {
+                    setshowNewpassword(false)
+                }}
+                />:
+                <TextInput.Icon
+                name="eye-off-outline"
+                style={{alignSelf:'center'}}
+                color={'grey'}
+                onPress={() => {
+                    setshowNewpassword(true)
+                }}
+            />
+            }
+            />
+            {CP_error == true ? 
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}>This field is reqiured </Text>
+            :
+            CPC_error == true ?
+            <Text style={{marginTop:3,marginLeft:3, color:'#FF155A'}}>Passowrd and Confirm Password not matched</Text>
+             :
+             null}
+     
 
-        >
-          <Text style={{color:'grey', alignSelf:'center'}}>Register</Text>
-        </TouchableOpacity>
+        <View style={styles.container_2}>
+
+              <View style={{flexDirection:'row'}}>
+           <TouchableOpacity 
+           onPress={()=> {toggleCheckBox == true? setToggleCheckBox(false):setToggleCheckBox(true)}}
+           style={styles.CheckBox}>
+             {toggleCheckBox == true ? 
+             <Ionicons name='checkmark' style={{alignSelf:'center'}} color='#64DFDF' size={24}/>
+             :
+             <Ionicons name='checkmark' style={{alignSelf:'center'}} color='white' size={24}/>
+             }
+             </TouchableOpacity>
+             
+              </View>
+              <Text style={styles.remember_txt}>
+              I agree to the gigaaa<Text style={{color:'#64DFDF'}}>Terms of Use</Text> and <Text style={{color:'#64DFDF'}}>Privacy Policy</Text>
+                </Text>
+
+
+             
+        </View>
+
+
+
+
+
+
+          <TouchableOpacity 
+          onPress={()=>{  proceed()}}
+          style={[styles.login_btn,{ backgroundColor:'#C4C4C4'  }]}>
+
+                <Text style={styles.btn_txt}>Create Account</Text>
+
+            </TouchableOpacity>
+
+
+                <Text style={styles.dhaccount}>
+                  Already have an account? <Text onPress={()=> {navigation.navigate('Register')}} style={{color:'#715DFF', fontWeight:'bold'}}>Log in</Text>
+
+                </Text>
+
         </View>
 
      
 
-           
+     <View style={{flex:1 ,paddingHorizontal:20 , marginTop:20,}}>
+
+           </View>      
 
 
 
@@ -205,3 +323,68 @@ onPress={()=> setshowConfirmpassword(false)}>
 }
 
 export default Register;
+
+
+const styles = StyleSheet.create({
+
+  appbar:{
+    width:deviceWidth,
+    justifyContent:'space-between',
+    backgroundColor:'white',
+    paddingHorizontal:15,
+    elevation:0,
+    height:deviceHeight*0.08
+ },
+ Header_txt:{
+  alignSelf:'center',
+   fontSize:20,
+  fontWeight:'600',
+ color:Appcolors.drakgrey
+},
+login_btn:{
+ width:'50%',
+ paddingVertical:12,
+ justifyContent:'center',
+ alignSelf:'center',
+ alignItems:'center',
+ borderRadius:8,
+  marginTop:30, 
+},
+btn_txt:{
+  fontWeight:'600',
+  color:'white',
+  fontSize:18,
+
+},
+container_2:{
+  flexDirection:'row',
+  marginTop:30,
+  justifyContent:'space-between',
+},
+Forgettxt:{
+  fontSize:16,
+  alignSelf:'center',
+},
+remember_txt:{
+  color:'#A6A8BA',
+  fontSize:16,
+  alignSelf:'center',
+  marginLeft:5,
+},
+CheckBox:{
+  borderWidth:1,
+  borderRadius:3,
+  padding:1,
+  height:30,
+  alignSelf:'center',
+  borderColor:'#A6A8BA',
+},
+dhaccount:{
+  fontWeight:'700',
+  fontSize:16,
+  marginTop:25,
+  alignSelf:'center',
+  color:Appcolors.drakgrey,
+}
+
+})

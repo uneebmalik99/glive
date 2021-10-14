@@ -13,13 +13,7 @@ const App = () => {
 
 
          <AppNavigator />
-         {/* <Drawer.Navigator drawerContent={props => <DrawerContent { ...props}/>}>
-             
-             
-             <Drawer.Screen name='AppNavigator' component={AppNavigator} />
-             
-              </Drawer.Navigator>  */}
-
+   
          
          
      </NavigationContainer>
