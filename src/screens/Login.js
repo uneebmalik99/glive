@@ -8,6 +8,9 @@ import {
     StatusBar,
     FlatList,
     ImageBackground,
+    TouchableWithoutFeedback,
+    KeyboardAvoidingView,
+    Keyboard,
     TouchableOpacity,
     Image,
     Button,
@@ -50,8 +53,9 @@ const Login = ({ navigation }) => {
 
   }
 
-
     return (
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
         <SafeAreaView style={{backgroundColor:"white", flex: 1 ,justifyContent:'center', width:deviceWidth,height:deviceHeight}}>
 
 <Appbar style={styles.appbar}>
@@ -77,7 +81,7 @@ style={{alignSelf:'center', }}>
 
 </Appbar>
 
-
+               
         <View style={{paddingVertical:20,justifyContent:'center', paddingHorizontal:20}}>
         <TextInput
       label="E-mail or Phone"
@@ -161,7 +165,7 @@ style={{alignSelf:'center', }}>
 
 
           <TouchableOpacity 
-          onPress={()=>{ AppConstance.LOGIN = '1'; AppConstance.ROLE ='1', navigation.navigate('Setting')}}
+          onPress={()=>{email != '' && pass != ''? navigation.navigate('Discover'): null}}
           style={[styles.login_btn,{ backgroundColor:email == '' || pass == ''? '#C4C4C4':'#64DFDF'        }]}>
 
                 <Text style={styles.btn_txt}>Log in</Text>
@@ -188,6 +192,7 @@ style={{alignSelf:'center', }}>
 
           
         </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 }
 

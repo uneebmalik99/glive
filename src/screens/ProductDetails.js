@@ -229,7 +229,7 @@ const renderVisitlist = ({ item, index }) => {
 
 
 <View style={{ paddingHorizontal:20,}}>
-<Text numberOfLines={2} style={{fontSize:18}} >{item.title}</Text>
+<Text numberOfLines={2} style={{fontSize:18, marginTop:10,}} >{item.title}</Text>
 <Text style={{fontSize:18,fontWeight:'700',marginTop:10, color:Appcolors.purple}} >$27,000</Text>
 
 </View>

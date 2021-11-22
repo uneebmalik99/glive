@@ -6,6 +6,8 @@ import {
     View,
     Text,
     StatusBar,
+    Keyboard,
+    TouchableWithoutFeedback,
     FlatList,
     ImageBackground,
     TouchableOpacity,
@@ -36,6 +38,8 @@ const Forgetpassword = ({ navigation }) => {
 
 
     return (
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
         <SafeAreaView style={{backgroundColor:"white", flex: 1 ,justifyContent:'center', width:deviceWidth,height:deviceHeight}}>
 
 <Appbar style={styles.appbar}>
@@ -114,6 +118,7 @@ style={{alignSelf:'center', }}>
 
           
         </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 }
 
