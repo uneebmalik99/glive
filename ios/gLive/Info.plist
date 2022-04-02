@@ -14,6 +14,14 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App needs Microphone Access Permission for testing</string>
+	<key>Privacy – Camera Usage Description</key>
+	<string>Allow glive app to Take Picture</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow glive app to access Photos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow glive app to capture Photo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

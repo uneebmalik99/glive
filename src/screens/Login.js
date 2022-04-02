@@ -43,12 +43,30 @@ const Login = ({ navigation }) => {
   const [emailerror , setemailerror] = useState(false)
   const login = () =>{ 
     if(email == ''){
-      set
+      
+      alert('please enter email')
 
     }else if(pass == ''){
-
+      alert('please enter password')
     }else{
 
+      if(email == 'uneebmalik@hotmail.com'){
+        AppConstance.ROLE = 1;
+        AppConstance.LOGIN  = 1;
+// 1 for seller  
+navigation.navigate('Discover')
+      }else if(email == 'Orhan@hotmail.com'){
+        AppConstance.ROLE = 0;
+        AppConstance.LOGIN  = 1;
+// 0 for buyer 
+        navigation.navigate('buyer')
+      }else{
+        AppConstance.LOGIN  = 1;
+
+        navigation.navigate('Discover')
+      }
+
+     
     }
 
   }
@@ -73,11 +91,7 @@ onPress={()=> navigation.goBack()}
 
 <Text style={styles.Header_txt}>Login</Text>
 
-<TouchableOpacity 
-style={{alignSelf:'center', }}>
-    
-
-</TouchableOpacity>
+<Text></Text>
 
 </Appbar>
 
@@ -165,7 +179,7 @@ style={{alignSelf:'center', }}>
 
 
           <TouchableOpacity 
-          onPress={()=>{email != '' && pass != ''? navigation.navigate('Discover'): null}}
+          onPress={()=>{login()}}
           style={[styles.login_btn,{ backgroundColor:email == '' || pass == ''? '#C4C4C4':'#64DFDF'        }]}>
 
                 <Text style={styles.btn_txt}>Log in</Text>
@@ -205,8 +219,9 @@ const styles = StyleSheet.create({
     width:deviceWidth,
     justifyContent:'space-between',
     backgroundColor:'white',
-    paddingHorizontal:15,
-    elevation:0,
+    borderBottomWidth:0.5,
+    borderColor:'#D5D5EC',
+    paddingHorizontal:20,
     height:deviceHeight*0.08
  },
  Header_txt:{

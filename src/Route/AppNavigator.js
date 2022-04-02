@@ -10,9 +10,9 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import Home from '../screens/Home'
 import BottomTabs from '../screens/BottomTabs';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Category from '../screens/Category';
 import SpecificCategory from '../screens/SpecificCategory';
@@ -43,51 +43,58 @@ import GuestProfileVS from '../screens/GuestProfileVS';
 import Forgetpassword from '../screens/Forgetpassword';
 import Emailsent from '../screens/Emailsent';
 import Resetpassword from '../screens/Resetpassword';
+import Guest from '../screens/Guest';
+import schedulealivestream from '../screens/schedulealivestream';
+import Golive from '../screens/Golive';
+import Uploadavideo from '../screens/Uploadavideo';
+import BuyerPreview from '../screens/BuyerPreview';
+import AccountSettings from '../screens/AccountSettings';
+import BecomeaBusiness from '../screens/BecomeaBusiness';
+import Language from '../screens/Language';
+import BecomeaBusinessnostore from '../screens/BecomeaBusinessnostore';
+import Createastore from '../screens/Createastore';
+import schedulealivestreamgolive from '../screens/schedulealivestreamgolive';
+import LiveStream from '../screens/LiveStream';
+import AddProduct from '../screens/AddProduct';
+import Profile from '../screens/Profile';
+import EditProfile from '../screens/EditProfile';
+import BuyerProfile from '../screens/BuyerProfile';
+import GuestProfile from '../screens/GuestProfile';
+import ProfileSecond from '../screens/ProfileSecond';
 
 
 const Stack = createStackNavigator();
  const Tab = createBottomTabNavigator();
 
 
- const TabScreen =()=>{
+ const GuestTab =()=>{
   return(
-  <Tab.Navigator
-  
-   options={{  headerShown:false, headerTitleAlign:"center", headerLeft: null ,    }} 
+  <Tab.Navigator 
+   options={{  
+   headerShown:false, headerTitleAlign:"center", headerLeft: null ,tabBarShowLabel:false    }} 
     tabBarOptions={{
-      activeTintColor: "#2F7C6E",
-      inactiveTintColor: "#222222",
+      tabBarActiveTintColor:'#E91327',
+      inactiveTintColor: "#616B7B",
       keyboardHidesTabBar: true,
-
-    style: {
-      position: 'absolute',
-      backgroundColor:'#ECF0F1',
-   alignSelf:'center',
-   marginTop:-20
-     // height:80,
-
-
-      
-    },
+      showLabel: false ,
+   
     }}
-    //  tabBarOptions={{
-     
-
+  //    tabBarOptions={{
   //   activeTintColor: 'black',
-    
-
   //   keyboardHidesTabBar: true,
   //   style: {
   //     height:55,
   //     position: 'absolute',
   //   },
   // }}
+  // tabBarOptions={{ showLabel: false }}
   >
-  <Tab.Screen name='Home' component={Homecontainer}
+  <Tab.Screen name='Guest' component={Guest}
    options={{
  headerShown:false,
-  
-//           tabBarLabel: 'Auctions',
+
+
+//           tabBarLabel: '',
 //           tabBarOptions: {
 //   labelStyle: {
 //     fontWeight:'bold'
@@ -102,11 +109,11 @@ const Stack = createStackNavigator();
 tabBarIcon: ({ focused, color, size }) => (
   
             <Feather
-                name='tv'                
+                name='compass'                
                 size={size ? size : 20}
-                color={focused ? color : "#222222"}
+                color={focused ? color : "#E91327"}
                 focused={focused}
-                color={color}
+                color={focused ? "#E91327" : "#616B7B"}
             />
 //             // <Image
 //             // source={require('../Assets/icons/sedancarfront0.png')}
@@ -115,7 +122,7 @@ tabBarIcon: ({ focused, color, size }) => (
 //         )
 )
         }}  />
-  <Tab.Screen name='Categorycontainer' component={Categorycontainer} 
+  <Tab.Screen name='Accounts' component={Accounts} 
    options={{
     headerShown:false,
           tabBarLabel: 'Category',
@@ -126,22 +133,22 @@ tabBarIcon: ({ focused, color, size }) => (
 },
 tabBarIcon: ({ focused, color, size }) => (
   
-  <Entypo
-      name="magnifying-glass"
+  <Ionicons
+      name="mic-outline"
       size={size ? size : 20}
       color={focused ? color : "#222222"}
       focused={focused}
-      color={color}
-  />
+      color={focused ? "#E91327" : "#616B7B"}
+      />
 
 )
 }}  />
 
-  <Tab.Screen name='Settingcontainer' component={Settingcontainer}
+  {/* <Tab.Screen name='Profile' component={Profile}
   
   options={{
     
-          tabBarLabel: 'Setting',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ focused, color, size }) => (
   
   <Icon
@@ -149,77 +156,282 @@ tabBarIcon: ({ focused, color, size }) => (
       size={size ? size : 20}
       color={focused ? color : "#222222"}
       focused={focused}
-      color={color}
-  />
+      color={focused ? "#E91327" : "#616B7B"}
+      />
+
+)
+}}  /> */}
+
+
+<Tab.Screen name='GuestProfile' component={GuestProfile}
+  
+  options={{
+    
+          tabBarLabel: 'BuyerProfile',
+          tabBarIcon: ({ focused, color, size }) => (
+  
+            <Ionicons
+            name="ios-person-outline"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
 
 )
 }}  />
+
+
+
  </Tab.Navigator>
   );
 }
 
 
-const Homecontainer =() =>{
+ const TabScreen =()=>{
   return(
-  <Stack.Navigator>
-<Stack.Screen name='Home' component={Home}
-options={{
-  headerShown:false,
+  <Tab.Navigator 
+   options={{  
+   headerShown:false, headerTitleAlign:"center", headerLeft: null ,tabBarShowLabel:false    }} 
+    tabBarOptions={{
+      tabBarActiveTintColor:'#E91327',
+      inactiveTintColor: "#616B7B",
+      keyboardHidesTabBar: true,
+      showLabel: false ,
+   
+    }}
+  //    tabBarOptions={{
+  //   activeTintColor: 'black',
+  //   keyboardHidesTabBar: true,
+  //   style: {
+  //     height:55,
+  //     position: 'absolute',
+  //   },
+  // }}
+  // tabBarOptions={{ showLabel: false }}
+  >
+  <Tab.Screen name='Discover' component={Discover}
+   options={{
+ headerShown:false,
+
+
+//           tabBarLabel: '',
+//           tabBarOptions: {
+//   labelStyle: {
+//     fontWeight:'bold'
+//   },
+// },
+          // tabBarIcon: ({ color }) => (
+          //   <Image
+          //   source={require('../Assets/icons/sedan-car-front.png')}
+
+          //   />
+          // ),
+tabBarIcon: ({ focused, color, size }) => (
   
-}} 
- />
-<Stack.Screen name='LivePresentation' component={LivePresentation} options={{
-  title: 'Offer Details',
-  headerShown:false,
+            <Feather
+                name='compass'                
+                size={size ? size : 20}
+                color={focused ? color : "#E91327"}
+                focused={focused}
+                color={focused ? "#E91327" : "#616B7B"}
+            />
+//             // <Image
+//             // source={require('../Assets/icons/sedancarfront0.png')}
 
-}}/>
-<Stack.Screen name='Seller' component={Seller} options={{
-  title: 'Offer Details',
-  headerShown:false,
+//             // />
+//         )
+)
+        }}  />
+  <Tab.Screen name='Accounts' component={Accounts} 
+   options={{
+    headerShown:false,
+          tabBarLabel: 'Category',
+          tabBarOptions: {
+  labelStyle: {
+    fontWeight:'bold'
+  },
+},
+tabBarIcon: ({ focused, color, size }) => (
+  
+  <Ionicons
+      name="mic-outline"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
 
-}}/>
-<Stack.Screen name='Product' component={Product} options={{
-  title: 'Offer Details',
-  headerShown:false,
+)
+}}  />
 
-}}/>
+  {/* <Tab.Screen name='Profile' component={Profile}
+  
+  options={{
+    
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ focused, color, size }) => (
+  
+  <Icon
+      name="settings-outline"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
 
-<Stack.Screen name='Events' component={Events} options={{
-  title: 'Offer Details',
-  headerShown:false,
-
-}}/>
+) 
+}}  /> */}
 
 
-  </Stack.Navigator>
+<Tab.Screen name='Profile' component={Profile}
+  
+  options={{
+    
+          tabBarLabel: 'BuyerProfile',
+          tabBarIcon: ({ focused, color, size }) => (
+  
+  <Fontisto
+      name="shopping-store"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
+
+)
+}}  />
+
+
+
+ </Tab.Navigator>
   );
 }
 
-const Categorycontainer =() =>{
+
+const TabScreen2 =()=>{
   return(
-  <Stack.Navigator>
-<Stack.Screen name='Category' component={Category}
-options={{
-  headerShown:false,
+  <Tab.Navigator 
+   options={{  
+   headerShown:false, headerTitleAlign:"center", headerLeft: null ,tabBarShowLabel:false    }} 
+    tabBarOptions={{
+      tabBarActiveTintColor:'#E91327',
+      inactiveTintColor: "#616B7B",
+      keyboardHidesTabBar: true,
+      showLabel: false ,
+   
+    }}
+  //    tabBarOptions={{
+  //   activeTintColor: 'black',
+  //   keyboardHidesTabBar: true,
+  //   style: {
+  //     height:55,
+  //     position: 'absolute',
+  //   },
+  // }}
+  // tabBarOptions={{ showLabel: false }}
+  >
+  <Tab.Screen name='Discover' component={Discover}
+   options={{
+ headerShown:false,
+
+
+//           tabBarLabel: '',
+//           tabBarOptions: {
+//   labelStyle: {
+//     fontWeight:'bold'
+//   },
+// },
+          // tabBarIcon: ({ color }) => (
+          //   <Image
+          //   source={require('../Assets/icons/sedan-car-front.png')}
+
+          //   />
+          // ),
+tabBarIcon: ({ focused, color, size }) => (
   
-}} 
- />
-<Stack.Screen name='SpecificCategory' component={SpecificCategory} options={{
-  headerShown:false,
+            <Feather
+                name='compass'                
+                size={size ? size : 20}
+                color={focused ? color : "#E91327"}
+                focused={focused}
+                color={focused ? "#E91327" : "#616B7B"}
+            />
+//             // <Image
+//             // source={require('../Assets/icons/sedancarfront0.png')}
 
-}}/>
-<Stack.Screen name='Product' component={Product} options={{
-  headerShown:false,
+//             // />
+//         )
+)
+        }}  />
+  <Tab.Screen name='Accounts' component={Accounts} 
+   options={{
+    headerShown:false,
+          tabBarLabel: 'Category',
+          tabBarOptions: {
+  labelStyle: {
+    fontWeight:'bold'
+  },
+},
+tabBarIcon: ({ focused, color, size }) => (
+  
+  <Ionicons
+      name="mic-outline"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
 
-}}/>
+)
+}}  />
+
+  {/* <Tab.Screen name='Profile' component={Profile}
+  
+  options={{
+    
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ focused, color, size }) => (
+  
+  <Icon
+      name="settings-outline"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
+
+)
+}}  /> */}
+
+
+<Tab.Screen name='BuyerProfile' component={BuyerProfile}
+  
+  options={{
+    
+          tabBarLabel: 'BuyerProfile',
+          tabBarIcon: ({ focused, color, size }) => (
+  
+  <Ionicons
+      name="ios-person-outline"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
+
+)
+}}  />
 
 
 
-  </Stack.Navigator>
+ </Tab.Navigator>
   );
 }
 
-const Settingcontainer =() =>{
+
+
+const SettingStack =() =>{
   return(
   <Stack.Navigator>
 <Stack.Screen name='Setting' component={Setting}
@@ -228,270 +440,60 @@ options={{
   
 }} 
  />
-<Stack.Screen name='Register' component={Register} options={{
-  headerShown:false,
-
-}}/>
-<Stack.Screen name='Login' component={Login} options={{
-  headerShown:false,
-
-}}/>
-<Stack.Screen name='BecomeSeller' component={BecomeSeller} options={{
-  headerShown:false,
-
-}}/>
-
-
-<Stack.Screen name='UpcomingJoined' component={UpcomingJoined} options={{
-  headerShown:false,
-
-}}/>
-
-<Stack.Screen name='Events' component={Events} options={{
-  headerShown:false,
-
-}}/>
-
-<Stack.Screen name='YourPurchases' component={YourPurchases} options={{
-  headerShown:false,
-
-}}/>
-
-
-
-<Stack.Screen name='YourPurchasesDetails' component={YourPurchasesDetails} options={{
-  headerShown:false,
-
-}}/>
-
-
-
-<Stack.Screen name='Accounts' component={Accounts} options={{
-  headerShown:false,
-
-}}/>
-
-<Stack.Screen name='LoginandSecurity' component={LoginandSecurity} options={{
-  headerShown:false,
-
-}}/>
-
-
-<Stack.Screen name='YourAddresses' component={YourAddresses} options={{
-  headerShown:false,
-
-}}/>
-<Stack.Screen name='PaymentMethods' component={PaymentMethods} options={{
-  headerShown:false,
-
-}}/>
-<Stack.Screen name='PaymentsTransactions' component={PaymentsTransactions} options={{
-  headerShown:false,
-
-}}/>
-<Stack.Screen name='Messagecenter' component={Messagecenter} options={{
-  headerShown:false,
-
-}}/>
-<Stack.Screen name='SavedProducts' component={SavedProducts} options={{
-  headerShown:false,
-
-}}/>
-
-
-
-
 
 
 
   </Stack.Navigator>
   );
 }
-// const TopTab = createMaterialTopTabNavigator();
-// const Discovertab = ()=> {
-//   return (
- 
-//     <TopTab.Navigator  tabBarOptions={{
-//       labelStyle: { fontSize: 13, fontWeight:'bold' },
-//       // tabStyle: { width: 130,height:60,paddingLeft:10 , paddingVertical:5 },
-//       inactiveTintColor:"#A6A8BA",
-//       style: {
-//         borderTopWidth: 0,
-//         elevation: 0
-//       },
-//       activeTintColor:"#f14057",
-//       pressColor:"white",
-//       indicatorStyle:{ backgroundColor: 'white' },
-//     }}
-//     swipeEnabled={false}
-//     >
-//       <TopTab.Screen  name="Discover"   component={Discover1}  />
-//       <TopTab.Screen name="Categories" component={Categories} />
-//       <TopTab.Screen name='MyServices' component={MyServices} />
-//     </TopTab.Navigator>
-//   );
-// }
-// const Discover1 = () =>{
-//   return(
-//   <Stack.Navigator 
-//    initialRouteName="Discover" 
-   
-//            screenOptions={{
-//              headerShown: false,
-//            }}>
-//          <Stack.Screen name="Discover" component={Discover}  />
-//          <Stack.Screen name="NewServices" component={NewServices} />
-//    </Stack.Navigator>
-//   );
-// }
-
-// const NewService = ()=> {
-//   return (
- 
-//     <TopTab.Navigator  tabBarOptions={{
-//       labelStyle: { fontSize: 13, fontWeight:'bold' },
-//       // tabStyle: { width: 130,height:60,paddingLeft:10 , paddingVertical:5 },
-//       inactiveTintColor:"#A6A8BA",
-//       style: {
-//         borderTopWidth: 0,
-//         elevation: 0
-//       },
-//       activeTintColor:"#f14057",
-//       pressColor:"white",
-//       indicatorStyle:{ backgroundColor: 'white' },
-//     }}
-//     swipeEnabled={false}
-//     >
-//       <TopTab.Screen  name="NewServices"   component={NewServices}  />
-//       <TopTab.Screen name="Categories" component={Categories} />
-//       <TopTab.Screen name='MyServices' component={MyServices} />
-//     </TopTab.Navigator>
-
-//   );
-// }
-
-
-
-
-
-// const Tab = createBottomTabNavigator();
-// const Tab = AnimatedTabBarNavigator();
-// const StackAuctions = createStackNavigator();
-// const StackInvoice =createStackNavigator();
-// const StackBids =createStackNavigator();
-
-// const TopTab = createMaterialTopTabNavigator();
-
-
-// const StackBid =({navigation}) =>{
-//   return(
-//   <StackBids.Navigator >
-// <StackBids.Screen name='My Bids' component={TabStack} options={{
-
-// headerStyle: {
-//             backgroundColor: '#268ef5',
-     
-//           },
-//           headerTitleAlign:"center",
-//           headerTitleStyle: {
-//             color:'white' ,
-//           },
-//       headerLeft: () => (
-//     <TouchableOpacity style={{position: 'absolute',paddingHorizontal:9,
-//   alignContent:'flex-start',alignSelf:'flex-start', }}
- 
-//  onPress={() => navigation.openDrawer()}
-//  >
-//       <Image source={ require('../Assets/icons/list1.png')} 
-//  style={{ width: 24, height:24,marginRight:10, alignSelf: 'center' }} resizeMode='contain'
-// />
-//   </TouchableOpacity>
-//             )}} />
-// <StackBids.Screen name='ongoingDetails' component={ongoingDetails} />
-// <StackBids.Screen name='WonbidsDetails' component={WonbidsDetails} />
-
-//   </StackBids.Navigator>
-//   );
-// }
-
-
-// const Stackinvoice =({navigation}) =>{
-//   return(
-//   <StackBids.Navigator >
-// <StackBids.Screen name='invoice1' component={invoice1} 
-// options={{
-
-//   title:'My Invoice',
-
-// headerStyle: {
-//             backgroundColor: '#268ef5',
-     
-//           },
-//           headerTitleAlign:"center",
-//           headerTitleStyle: {
-//             color:'white' ,
-//           },
-//       headerLeft: () => (
-//     <TouchableOpacity style={{position: 'absolute',paddingHorizontal:9,
-//   alignContent:'flex-start',alignSelf:'flex-start', }}
- 
-//  onPress={() => navigation.openDrawer()}
-//  >
-//       <Image source={ require('../Assets/icons/list1.png')} 
-//  style={{ width: 24, height:24,marginRight:10, alignSelf: 'center' }} resizeMode='contain'
-// />
-//   </TouchableOpacity>
-//             )}} 
-
-//             />
-
-//  <StackBids.Screen name='invoice2' component={invoice2} options={{
-
-// title:'My Invoice',
-
-// headerStyle: {
-//           backgroundColor: '#268ef5',
-   
-//         },
-//         headerTitleAlign:"center",
-//         headerTitleStyle: {
-//           color:'white' ,
-//         },
-        
-//  }}/>
-
-// {/* <Stackinvoice.Screen name='ongoingDetails' component={ongoingDetails} />
-// <Stackinvoice.Screen name='WonbidsDetails' component={WonbidsDetails} /> */}
-
-//   </StackBids.Navigator>
-//   );
-// }
-
 
 
 const AppNavigator = (props) => {
  return (
    <Stack.Navigator 
-   initialRouteName="Discover" 
+   initialRouteName="Guest" 
    
            screenOptions={{
              headerShown: false,
            }}
            >
 
-          <Stack.Screen name="Discover" component={Discover} />
-          <Stack.Screen name="ProductDetails" component={ProductDetails} />
+          {/* <Stack.Screen name="Discover" component={Discover} /> */}
+          {/* <Stack.Screen name="ProductDetails" component={ProductDetails} />
           <Stack.Screen name="StreamWatching" component={StreamWatching} />
-          <Stack.Screen name='ChannelDetails' component={ChannelDetails} />
+          <Stack.Screen name='ChannelDetails' component={ChannelDetails} /> */}
           <Stack.Screen name='GuestProfileVS' component={GuestProfileVS} />
 
+          {/* <Stack.Screen name='TabScreen' component={TabScreen} /> */}
+
+          <Stack.Screen name='schedulealivestream' component={schedulealivestream} />
+          <Stack.Screen name='Golive' component={Golive} />
+          <Stack.Screen name='schedulealivestreamgolive' component={schedulealivestreamgolive} />
+          <Stack.Screen name='LiveStream' component={LiveStream} />
+
+          <Stack.Screen name='Setting' component={Setting} />
+          <Stack.Screen name='EditProfile' component={EditProfile} />
+          
+          <Stack.Screen name='ProfileSecond' component={ProfileSecond} />
+          
+
+          <Stack.Screen name='AddProduct' component={AddProduct} />
+          <Stack.Screen name='Uploadavideo' component={Uploadavideo} />
+          <Stack.Screen name='BuyerPreview' component={BuyerPreview} />
+          
+          <Stack.Screen name='Createastore' component={Createastore} />
 
 
+          
+          <Stack.Screen name='AccountSettings' component={AccountSettings} />
+<Stack.Screen name='BecomeaBusiness' component={BecomeaBusiness} />
+<Stack.Screen name='BecomeaBusinessnostore' component={BecomeaBusinessnostore} />
 
+<Stack.Screen name='Language' component={Language} />
 
-
-
-         <Stack.Screen name="Homes" component={TabScreen} />
+          <Stack.Screen name='Guest' component={GuestTab}/>
+         <Stack.Screen name="Discover" component={TabScreen} />
+         <Stack.Screen name="buyer" component={TabScreen2} />
 
          <Stack.Screen name="BottomTabs" component={BottomTabs} />
   

@@ -23,7 +23,9 @@ import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import BottomTabs from './BottomTabs';
 import Feather from 'react-native-vector-icons/dist/Feather';
 import { Appbar, Card } from 'react-native-paper';
-
+import Appcolors from '../AppColors/Appcolors.js';
+import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
+import SvgUri from 'react-native-svg-uri'; // SVG Package
 
 
 
@@ -34,284 +36,153 @@ const Setting = ({route ,navigation }) => {
   const [Logincheck , setLogincheck] = useState(AppConstance.LOGIN)
   const [Rolecheck , setRolecheck] = useState(AppConstance.ROLE)
 
-  const [filteredDataSource, setFilteredDataSource] = useState([
-    
-        {
-            id: 1,
-            category : 'Cosmetics'
-          },
-          {
-              id: 2,
-              category : 'Coffee'
-      
-             
-          },
-          {
-              id: 3,
-              category : 'Cool Stuff'
-          }
-           
-    
-    ]);
-    const [search ,setSearch]=useState('')
-
-
-const [Products, setProducts] = useState([
+  const [data  , setdata] = useState([
     {
-      id: 1,
-      category : 'Cosmetics'
+      name:'Account Settings',
+      icon:require('../images/gLive_Icons/Settings/account_settings_icon.svg'),
+      page:'AccountSettings'
     },
     {
-        id: 2,
-        category : 'Coffee'
+      name:'Become a Business',
+      icon:require('../images/gLive_Icons/Settings/businesssettingsicon.svg'),
+      // page:'BecomeaBusiness',
+      page:'BecomeaBusinessnostore'
 
-       
     },
     {
-        id: 3,
-        category : 'Cool Stuff'
-    }
-      
-  ]
-)
+      name:'Language',
+      icon:require('../images/gLive_Icons/Settings/language_icon.svg'),
+      page:'Language'
+
+    },
+    {
+      name:'Invite a Friend',
+      icon:require('../images/gLive_Icons/Settings/invite_friend_icon.svg'),
+      page:'Setting'
+
+    },
+    {
+      name:'FAQ',
+      icon:require('../images/gLive_Icons/Settings/faq_icon.svg'),
+      page:'Setting'
+
+    },
+    {
+      name:'Give Feedback',
+      icon:require('../images/gLive_Icons/Settings/feedback_icon.svg'),
+      page:'Setting'
+
+    },
+    
+  ])
+  const [data2  , setdata2] = useState([
+    {
+      name:'Account Settings',
+      icon:require('../images/gLive_Icons/Settings/account_settings_icon.svg'),
+      page:'AccountSettings'
+    },
+    
+    {
+      name:'Language',
+      icon:require('../images/gLive_Icons/Settings/language_icon.svg'),
+      page:'Language'
+
+    },
+    {
+      name:'Invite a Friend',
+      icon:require('../images/gLive_Icons/Settings/invite_friend_icon.svg'),
+      page:'Setting'
+
+    },
+    {
+      name:'FAQ',
+      icon:require('../images/gLive_Icons/Settings/faq_icon.svg'),
+      page:'Setting'
+
+    },
+    {
+      name:'Give Feedback',
+      icon:require('../images/gLive_Icons/Settings/feedback_icon.svg'),
+      page:'Setting'
+
+    },
+    
+  ])
 
 useEffect(() => {
-
-  const unsubscribe = navigation.addListener('focus', () => {
-    setLogincheck(AppConstance.LOGIN)
-    setRolecheck(AppConstance.ROLE)
-    // The screen is focused
-    // Call any action
-  });
-
-  setLogincheck(AppConstance.LOGIN)
-  setRolecheck(AppConstance.ROLE)
-
-  
 
   return () => {
     
   }
 }, [])
 
+const renderLivenow = ({ item, index }) => {  
+  return(
+   <TouchableOpacity 
+   onPress={()=> {navigation.navigate(item.page)}}
+   style={{borderColor:'#E3E3EB',flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1,height:60,paddingHorizontal:15, width:'100%'}}>
+
+    <View style={{ width:'50%', flexDirection:'row', }}>
+    <View style={{width:'20%',justifyContent:'center', }}>
+    <SvgUri
+      style={{alignSelf:'center'}}
+      source={item.icon}
+    />
+    </View>
+      <View style={{marginLeft:15, justifyContent:'center'}}>
+      <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>{item.name}</Text>
+    </View>
+    </View>
+
+
+    <View style={{justifyContent:'center'}}>
+      <MaterialIcons name='navigate-next' color='#616B7B' style={{alignSelf:'center'}} size={25}/>
+    </View>
+   
+
+   </TouchableOpacity>
+
+  );
+
+
+
+}
+
 
     return (
         <SafeAreaView style={{backgroundColor:"white", flex: 1 ,width:deviceWidth,height:deviceHeight}}>
 
-<View style={{  width:'100%',height:deviceHeight*0.08,backgroundColor:'white', paddingHorizontal:13, flexDirection:'column'}}>
+<Appbar style={styles.appbar}>
+
+<Ionicons  onPress={()=> {navigation.goBack()}} name='ios-close-outline'  size={30} color='#616B7B'/>
+
+<Text style={{fontWeight:'500', fontSize:18}}>Settings</Text>
+
+<View>
+
+<Text></Text>
+</View>
+  </Appbar>
+
+
+  <FlatList
+         contentInsetAdjustmentBehavior="automatic"
+         data={AppConstance.ROLE == 1 ? data2 : data }
   
-  <View style={{ width:'100%',height:deviceHeight*0.07,marginTop:5, flexDirection:'row'}}>
-  
-  <View style={{justifyContent:'center',width:'20%', height:'100%',}}>
-  
-          <TouchableOpacity
-                            style={{ alignSelf: 'flex-start', }}
-                            onPress={() => {
-            navigation.goBack();
-        }}
+         contentContainerStyle={{height:'100%' ,width:'100%', marginTop:0, alignSelf:'center', paddingHorizontal:2,  }}
+         renderItem={renderLivenow}
+         keyExtractor={(item,id) => id.toString()}
+         /> 
 
-                        >
-                            <Ionicons name='chevron-back-outline' size={21}  />
-                            {/* <Image style={{ width: 21, height: 21, alignSelf: 'flex-start', resizeMode: 'contain' }} source={require('../images/Buttons_SideMenu.png')} /> */}
-                        </TouchableOpacity> 
-  
-  </View>
-  <View style={{justifyContent:'center',width:'60%',height:'100%',}}>
-  <Text style={{ alignSelf: 'center', textAlignVertical: 'center', fontSize: 18, fontWeight: 'bold' }}>Settings</Text>
-  </View>
-  
-  <View style={{justifyContent:'center',width:'20%', height:'100%',}}>
-  <TouchableOpacity
-
-  
-  style={{ alignSelf: 'flex-end', marginLeft: 40 }}
-
-//    onPress={()=>
-//    navigation.navigate('EditGig')}
-    
-                            >
-                                {/* <Entypo name='dots-three-vertical'  size={20}  color='black'/> */}
-            {/* <MaterialCommunityIcons name='bell-outline' size={20} color='#292F58' style={{marginRight:3}}/> */}
-                      </TouchableOpacity>
-  
-  </View>
-  
-  
-  
-  </View>
-
-  
-  
-           </View>
-    {Logincheck == '1' ?
-
-
-        <ScrollView style={{paddingHorizontal:20.}}>
-          { Rolecheck == '1' ?
-          <View >
-        
-        
-                <View style={{paddingVertical:20,justifyContent:'center', paddingHorizontal:20}}>
+         <ScrollView>
 
 
 
-<TouchableOpacity 
-onPress={()=> {navigation.navigate('UpcomingJoined')}}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Subscribed & Upcoming</Text>
-        </TouchableOpacity>
-        </View>
-
-     
-
-     <View style={{flex:1 ,paddingHorizontal:20 , marginTop:0,}}>
-     <TouchableOpacity 
-     onPress={()=> navigation.navigate('YourPurchases')}
-        style={{height:40,marginTop:0, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Your Purchases</Text>
-        </TouchableOpacity>      
-        
-        <TouchableOpacity 
-        onPress={()=> navigation.navigate('Accounts')}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Account</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-        onPress={()=> setLogincheck('0')}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Logout</Text>
-        </TouchableOpacity>
-           </View>      
-
-      
-
-          </View>
-
-          :
-
-          <View >
-               <View style={{paddingVertical:20,justifyContent:'center', paddingHorizontal:20}}>
+   
 
 
 
-<TouchableOpacity 
-onPress={()=> {AppConstance.LOGIN = '1' , setLogincheck('1'),  navigation.navigate('Setting')} }
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Inquries</Text>
-        </TouchableOpacity>
-        </View>
-
-     
-
-     <View style={{flex:1 ,paddingHorizontal:20 , marginTop:0,}}>
-     <TouchableOpacity 
-     onPress={()=> navigation.navigate('Register')}
-        style={{height:40,marginTop:0, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Your Sales</Text>
-        </TouchableOpacity>
-        
-        
-        <TouchableOpacity 
-     onPress={()=> navigation.navigate('Register')}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Your Products</Text>
-        </TouchableOpacity>    
-        
-        <TouchableOpacity 
-        onPress={()=> navigation.navigate('BecomeSeller')}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Account</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-        onPress={()=> setLogincheck('0')}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'flex-start'}}>Logout</Text>
-        </TouchableOpacity>
-           </View>      
-
-
-          
-      
-
-          </View>
-}
-        </ScrollView>
-
-:
- <ScrollView style={{paddingHorizontal:20.}}>
-         <View style={{paddingVertical:20,justifyContent:'center', paddingHorizontal:20}}>
-{/* <TextInput 
-style={{height:40, borderRadius:12, borderWidth:0.4, paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-placeholder='Email'
-/>
-<TextInput 
-style={{height:40,marginTop:10, borderRadius:12, borderWidth:0.4, paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-placeholder='Password'
-
-/> */}
-
-
-{/* <TouchableOpacity 
-onPress={()=> {AppConstance.LOGIN = '1' , setLogincheck('1'),setRolecheck('1'),  navigation.navigate('Setting')} }
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'center'}}>Login as user</Text>
-        </TouchableOpacity> */}
-        <TouchableOpacity 
-onPress={()=> { navigation.navigate('Login')} }
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'center'}}>Login</Text>
-        </TouchableOpacity>
-        </View>
-
-     
-
-     <View style={{flex:1 ,paddingHorizontal:20 , marginTop:20,}}>
-     <TouchableOpacity 
-     onPress={()=> navigation.navigate('Register')}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'center'}}>Register</Text>
-        </TouchableOpacity>      
-        
-        <TouchableOpacity 
-        onPress={()=> navigation.navigate('BecomeSeller')}
-        style={{height:40,marginTop:15, borderRadius:12, borderWidth:0.4,justifyContent:'center', paddingHorizontal:10 ,borderColor:'grey',  backgroundColor:'#D0D3D4'}}
-
-        >
-          <Text style={{color:'grey', alignSelf:'center'}}>Become a Seller</Text>
-        </TouchableOpacity>
-           </View>      
-
-
-        </ScrollView>
-
-} 
-
-
+         </ScrollView>
 
 
 
@@ -319,5 +190,65 @@ onPress={()=> { navigation.navigate('Login')} }
         </SafeAreaView>
     );
 }
+
+
+const styles = StyleSheet.create({
+
+  appbar:{
+    width:deviceWidth,
+    justifyContent:'space-between',
+    backgroundColor:'white',
+    borderBottomWidth:0.5,
+    borderColor:'#D5D5EC',
+    paddingHorizontal:20,
+    height:deviceHeight*0.08
+ },
+ StreamList_main:{
+  
+  width:'100%',
+  
+ },
+ Productslist_main:{
+  width:'45%',
+  backgroundColor:'white',
+  margin:10,
+  borderRadius:8,
+  padding:6,
+  shadowColor: "grey",
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 2.84,
+  elevation: 2,
+ },
+ txt:{
+  alignSelf:'center', 
+  fontSize:22,
+   paddingVertical:10,
+   color:Appcolors.drakgrey,
+ },
+ body:{
+  width:'100%',
+  backgroundColor:'white',
+  paddingHorizontal:0,
+  height:'95%',
+  paddingVertical:10,
+  paddingHorizontal:20,
+  flex: 1,
+
+ 
+ },
+
+
+ Header_txt:{
+   alignSelf:'center',
+    fontSize:16,
+   fontWeight:'500',
+  color:Appcolors.drakgrey
+ },
+
+  });
 
 export default Setting;
