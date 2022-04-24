@@ -242,7 +242,6 @@ const schedulealivestreamgolive = ({route, navigation }) => {
 
 
     return (
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 
       <SafeAreaView style={{height:deviceHeight, width:deviceWidth}}> 
       <StatusBar barStyle='default' />
@@ -782,9 +781,9 @@ elevation: 5,
                       alignSelf:'center', width:deviceWidth, backgroundColor:'#E3E3EB'}}>
         </View>
 
-        <View style={{paddingVertical:2,alignItems:'flex-end',paddingHorizontal:2, justifyContent:'flex-end',width:'100%'}}>
+        <View style={{paddingVertical:20,alignItems:'flex-end',paddingHorizontal:2, justifyContent:'flex-end',width:'100%'}}>
 
-        <TouchableOpacity onPress={()=> {navigation.navigate('LiveStream')}} style={{marginTop:10, backgroundColor:'#162741',borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
+        <TouchableOpacity onPress={()=> {navigation.navigate('LiveStream')}} style={{marginVertical:5, backgroundColor:'#162741',borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
           <Text style={{color:'white',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Stream</Text>
         </TouchableOpacity>
 
@@ -795,7 +794,6 @@ elevation: 5,
   
   
         </SafeAreaView>
-      </TouchableWithoutFeedback>
     );
 }
 

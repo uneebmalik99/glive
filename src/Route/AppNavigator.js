@@ -60,7 +60,12 @@ import Profile from '../screens/Profile';
 import EditProfile from '../screens/EditProfile';
 import BuyerProfile from '../screens/BuyerProfile';
 import GuestProfile from '../screens/GuestProfile';
-import ProfileSecond from '../screens/ProfileSecond';
+import ProfileStore from '../screens/ProfileStore';
+import Livestreams from '../screens/Livestreams';
+import EditProfileStore from '../screens/EditProfileStore';
+import ProfileCatalogue from '../screens/ProfileCatalogue';
+import AddProducts from '../screens/AddProducts';
+import Editschedulealivestream from '../screens/Editschedulealivestream';
 
 
 const Stack = createStackNavigator();
@@ -163,7 +168,7 @@ tabBarIcon: ({ focused, color, size }) => (
 }}  /> */}
 
 
-<Tab.Screen name='GuestProfile' component={GuestProfile}
+<Tab.Screen name='Login' component={Login}
   
   options={{
     
@@ -429,6 +434,84 @@ tabBarIcon: ({ focused, color, size }) => (
   );
 }
 
+const ProfileStorestack =()=>{
+  return(
+  <Tab.Navigator 
+   options={{  
+   headerShown:false, headerTitleAlign:"center", headerLeft: null ,tabBarShowLabel:false    }} 
+    tabBarOptions={{
+      tabBarActiveTintColor:'#E91327',
+      inactiveTintColor: "#616B7B",
+      keyboardHidesTabBar: true,
+      showLabel: false ,
+   
+    }}
+
+  >
+  <Tab.Screen name='Discover' component={Discover}
+   options={{
+ headerShown:false,
+
+tabBarIcon: ({ focused, color, size }) => (
+  
+            <Feather
+                name='compass'                
+                size={size ? size : 20}
+                color={focused ? color : "#E91327"}
+                focused={focused}
+                color={focused ? "#E91327" : "#616B7B"}
+            />
+
+)
+        }}  />
+  <Tab.Screen name='Accounts' component={Accounts} 
+   options={{
+    headerShown:false,
+          tabBarLabel: 'Category',
+          tabBarOptions: {
+  labelStyle: {
+    fontWeight:'bold'
+  },
+},
+tabBarIcon: ({ focused, color, size }) => (
+  
+  <Ionicons
+      name="mic-outline"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
+
+)
+}}  />
+
+
+
+<Tab.Screen name='ProfileStore' component={ProfileStore}
+  
+  options={{
+    
+          tabBarLabel: 'ProfileStore',
+          tabBarIcon: ({ focused, color, size }) => (
+  
+<Fontisto
+      name="shopping-store"
+      size={size ? size : 20}
+      color={focused ? color : "#222222"}
+      focused={focused}
+      color={focused ? "#E91327" : "#616B7B"}
+      />
+
+)
+}}  />
+
+
+
+ </Tab.Navigator>
+  );
+}
+
 
 
 const SettingStack =() =>{
@@ -467,17 +550,26 @@ const AppNavigator = (props) => {
           {/* <Stack.Screen name='TabScreen' component={TabScreen} /> */}
 
           <Stack.Screen name='schedulealivestream' component={schedulealivestream} />
+          <Stack.Screen name='Editschedulealivestream' component={Editschedulealivestream} />
+
+
           <Stack.Screen name='Golive' component={Golive} />
           <Stack.Screen name='schedulealivestreamgolive' component={schedulealivestreamgolive} />
           <Stack.Screen name='LiveStream' component={LiveStream} />
 
           <Stack.Screen name='Setting' component={Setting} />
           <Stack.Screen name='EditProfile' component={EditProfile} />
-          
-          <Stack.Screen name='ProfileSecond' component={ProfileSecond} />
+          <Stack.Screen name='EditProfileStore' component={EditProfileStore} />
+          <Stack.Screen name='ProfileCatalogue' component={ProfileCatalogue} />
+
+
+          <Stack.Screen name='Livestreams' component={Livestreams} />
           
 
           <Stack.Screen name='AddProduct' component={AddProduct} />
+          <Stack.Screen name='AddProducts' component={AddProducts} />
+
+          
           <Stack.Screen name='Uploadavideo' component={Uploadavideo} />
           <Stack.Screen name='BuyerPreview' component={BuyerPreview} />
           
@@ -494,6 +586,9 @@ const AppNavigator = (props) => {
           <Stack.Screen name='Guest' component={GuestTab}/>
          <Stack.Screen name="Discover" component={TabScreen} />
          <Stack.Screen name="buyer" component={TabScreen2} />
+         <Stack.Screen name="ProfileStore2" component={ProfileStorestack} />
+
+         
 
          <Stack.Screen name="BottomTabs" component={BottomTabs} />
   

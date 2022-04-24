@@ -15,8 +15,7 @@ import {
     Keyboard,
     Modal,
     Button,
-    SafeAreaView,
-    Platform
+    SafeAreaView
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -44,14 +43,17 @@ import { validationCondition } from 'jest-validate/build/condition';
 import ImageCropPicker from 'react-native-image-crop-picker';
 // import BottomSheet from "react-native-bottomsheet-reanimated";
 import RNPickerSelect from 'react-native-picker-select';
-import DropDownPicker from 'react-native-dropdown-picker';
 import ModalDropdown from 'react-native-modal-dropdown';
 import DateRangePicker from "rnv-date-range-picker";
 import SwipeablePanel from 'react-native-sheets-bottom';
 import BottomSheet from "react-native-swipeable-bottom-sheet"
 import RBSheet from "react-native-raw-bottom-sheet";
-import Video from 'react-native-video';
-import VideoPlayer from 'react-native-video-player';
+import {Picker} from '@react-native-picker/picker';
+// import DatePicker from 'react-native-date-picker'
+import DatePicker from 'react-native-neat-date-picker'
+import NumericInput from 'react-native-numeric-input'
+import RadioButtonRN from 'radio-buttons-react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const  images1= [
   "https://source.unsplash.com/1024x768/?nature",
@@ -60,53 +62,80 @@ const  images1= [
   "https://source.unsplash.com/1024x768/?tree",
 ]
 
+const colorOptions = {
+  headerColor:'white',
+  backgroundColor:'white',
+  headerTextColor:"#162741",
+  changeYearModalColor:'#737D8DB2',
+  weekDaysColor:'#737D8DB2',
+  selectedDateBackgroundColor:'#1C54DB',
 
-const Uploadavideo = ({route, navigation }) => {
+}
+const AddProducts = ({route, navigation }) => {
 
+  const [showDatePicker, setShowDatePicker] = useState(false)
 
+  const openDatePicker = () => {
+    setShowDatePicker(true)
+  }
+
+  const onCancel = () => {
+    // You should close the modal in here
+    setShowDatePicker(false)
+    
+  }
+
+  const onConfirm = ( date ) => {
+    // You should close the modal in here
+    setShowDatePicker(false)
+    
+    // alert('ji')
+    // The parameter 'date' is a Date object so that you can use any Date prototype method.
+    console.log(date.dateString)
+    setDate(date.dateString)
+  }
+
+  const [linkedProduct,setlinkedProduct ]= useState(false)
+  const [post, setpost]= useState(false)
+  const [decided, setdecided] = useState(false)
   const [datemodal,setdatemodal] = useState(false)
   const [timemodal,settimemodal] = useState(false)
-  const [linkedProduct,setlinkedProduct ]= useState(false)
-
+  const [timemodal2 , settimemodal2]= useState(false)
+  const [selectedLanguage, setSelectedLanguage] = useState();
+  const [date, setDate] = useState('yyyy/mm/dd')
+  // const [open, setOpen] = useState(false)
+  const [timeAmPM, settimeAmPM]=useState(false)
   const refRBSheet = useRef();
-
+  const [checked ,setchecked] = useState('First')
   const [savemodal,setsavemodal] = useState(false)
-
+  const [hours, sethours] = useState('hh')
+  const [minutes, setminutes] = useState('mm')
   const [bottomproducts, setbottomproducts] =useState(true)
   const [img, setimg]= useState(null)
   const [data , setdata] = useState([
-    { id: 1, name: 'Post it' }
+    { id: 1,active:'1', name: 'Post it' },
+    { id: 1, active:'1',name: 'Post it' },
+    { id: 1, active:'0',name: 'Post it' },
+    { id: 1, active:'0',name: 'Post it' },
+    { id: 1, active:'1',name: 'Post it' },
+
   ])
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('Select language');
   const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'}
+    {label: 'item1', value: 'item1'},
+    {label: 'item2', value: 'item2'}
   ]);
 
-  const [langdropdown,setlangdropdown] = useState(false)
-  const [langdropdownvalue,setlangdropdownvalue] = useState([
-    {label: 'English', value: 'English'},
-    {label: 'German', value: 'German'},
-    {label: 'German', value: 'German'}
-  ])
-  const [langvalue, setlangvalue] = useState('Select language');
 
 
-  const [catdropdown,setcatdropdown] = useState(false)
-  const [catdropdownvalue,setcatdropdownvalue] = useState([
-    {label: 'Clothing', value: 'Clothing'},
-    {label: 'Electronics', value: 'Electronics'}
-  ])
-  const [catvalue, setcatvalue] = useState('Select language');
-
-
-
-
-  const [languages, setlanguages] = useState([
-    {label: 'English', value: 'English'},
-    {label: 'German', value: 'German'}
+  const [priceopen, setpriceOpen] = useState(false);
+  const [pricevalue, setpricevalue] = useState('GPB');
+  const [priceitems, setpriceitems] = useState([
+    {label: 'GPB', value: 'GPB'},
+    {label: 'USD', value: 'USD'}
   ]);
+  // const [priceopen,setpriceopen = useState(false)]
   const [category , setcategory] = useState([
     {
       id:1,
@@ -179,14 +208,6 @@ const Uploadavideo = ({route, navigation }) => {
   
   };
 
-  const selectVideo = async () => {
-    ImagePicker.launchImageLibrary({ mediaType: 'video', includeBase64: true }, (response) => {
-        console.log(JSON.stringify(response));
-        // alert(JSON.stringify(response))
-        setvideo(response.assets[0].uri)
-    })
-}
-
   const TakePhoto = async (type) => {
     let options = {
       
@@ -214,7 +235,7 @@ const Uploadavideo = ({route, navigation }) => {
           return;
         }else{
          
-       setimg(response.assets[0].uri)
+       
         }
   
       });
@@ -227,38 +248,7 @@ const Uploadavideo = ({route, navigation }) => {
 
     return(
       <TouchableOpacity 
-      onPress={()=> {
-        if(item.active == '1'){
-          let markers = [ ...data];
-          markers[index] = {...markers[index], active: '0'};
-          setdata(markers)
-          // this.setState({ markers });
-          
-            console.log(JSON.stringify(markers))
-
-
-
-        //   let temp_state = [...data];
-        //     alert(temp_state)
-        // objIndex = temp_state.findIndex((obj => obj.active == '0'));
-        // // alert(objIndex)
-        // console.log("Before update: ", temp_state[objIndex])
-
-        // //Update object's name property.
-        // temp_state[objIndex].active = "0"
-        
-        // //Log object to console again.
-        // console.log("After update: ", temp_state[objIndex])
-        // setdata(temp_state)
-
-      } else{
-        let markers = [ ...data];
-        markers[index] = {...markers[index], active: '1'};
-        setdata(markers)
-        
-      }
-
-      }}
+      onPress={()=> {navigation.navigate('Login')}}
       style={{height:deviceHeight*0.11,borderRadius:5,borderWidth:1,borderColor:'#E3E3EB',  backgroundColor:item.active==1?'#EDEDF6':'white', width:'100%', flexDirection:'row', marginTop:10,}}>
 
         <View style={{width:'30%', padding:8,}}>
@@ -295,6 +285,7 @@ const Uploadavideo = ({route, navigation }) => {
 
 
     return (
+      // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 
       <SafeAreaView style={{height:deviceHeight, width:deviceWidth}}> 
       <StatusBar barStyle='default' />
@@ -330,6 +321,7 @@ const Uploadavideo = ({route, navigation }) => {
                 borderRadius:5,
               }}>
     
+
 
            <View style={{borderBottomWidth:0.3,paddingHorizontal:15, justifyContent:'space-between', flexDirection:'row', paddingVertical:7, borderColor:'#D0D3D4'}}>
          
@@ -376,10 +368,10 @@ const Uploadavideo = ({route, navigation }) => {
 
              </View>
    
-             <View style={{width:'100%',borderBottomRightRadius:5,borderBottomLeftRadius:5, backgroundColor:'#EDEDF6',paddingVertical:15, paddingHorizontal:20,}}>
+             <TouchableOpacity onPress={()=> {setdatemodal(false); openDatePicker()}} style={{width:'100%',borderBottomRightRadius:5,borderBottomLeftRadius:5, backgroundColor:'#EDEDF6',paddingVertical:15, paddingHorizontal:20,}}>
              <Text style={{fontSize:15, fontWeight:'400'}}>Custom</Text>
 
-             </View>
+             </TouchableOpacity>
 
 
              
@@ -537,10 +529,12 @@ onRequestClose={() => {
    </View>
 
 
-   <View style={{width:'100%',borderBottomRightRadius:5,borderBottomLeftRadius:5, backgroundColor:'#EDEDF6',paddingVertical:15, paddingHorizontal:20,}}>
+   <TouchableOpacity 
+   onPress={()=> {settimemodal2(true);settimemodal(false)}}
+   style={{width:'100%',borderBottomRightRadius:5,borderBottomLeftRadius:5, backgroundColor:'#EDEDF6',paddingVertical:15, paddingHorizontal:20,}}>
    <Text style={{fontSize:15, fontWeight:'400'}}>Custom</Text>
 
-   </View>
+   </TouchableOpacity>
 
 
    
@@ -551,10 +545,11 @@ onRequestClose={() => {
       </Modal>
 
 
-<Modal
+
+      <Modal
 transparent={true}
 animationType={'fade'}
-visible={savemodal}
+visible={timemodal2}
 onRequestClose={() => {
 
   console.log('close modal');
@@ -571,41 +566,79 @@ onRequestClose={() => {
   }}>
   <View
     style={{
-      width: '75%',
-      paddingVertical:10,
+      width: '90%',
       flexDirection: 'column',
       backgroundColor:'white',
       borderRadius:5,
     }}>
 
 
- <View style={{paddingHorizontal:25,justifyContent:'flex-start', flexDirection:'row', paddingVertical:7, }}>
+ <View style={{borderBottomWidth:0.3,paddingHorizontal:15, justifyContent:'space-between', flexDirection:'row', paddingVertical:7, borderColor:'#D0D3D4'}}>
 
-  
+  <TouchableOpacity style={{alignSelf:'center'}} onPress={()=> {settimemodal2(false); settimemodal(true)}}>
+
+ <MaterialIcons  style={{alignSelf:'center'}} name='arrow-back'  size={25} color='#162741'/>
+</TouchableOpacity>
     <View>
-   <Text style={{alignSelf:'center',fontSize:15, fontWeight:'700', paddingVertical:7,}}>Post stream</Text>
+   <Text style={{alignSelf:'center',fontSize:15, fontWeight:'500', paddingVertical:10,}}>Set time</Text>
     </View>
 
-    
+    <View>
+   <Text style={{alignSelf:'center',fontSize:15, fontWeight:'500', paddingVertical:10,}}></Text>
+    </View>
  </View>
 
  
 
 
- <View style={{width:'100%', paddingVertical:7, paddingHorizontal:25,}}>
-   <Text style={{fontSize:15, fontWeight:'400'}}>Would you like to post the stream?</Text>
+ <View style={{width:'100%',borderBottomWidth:1,justifyContent:'space-around', borderColor:'#D0D0DE99',flexDirection:'row', paddingVertical:20, paddingHorizontal:20,}}>
+ <NumericInput type='up-down'
+ minValue={0}
+ maxValue={12}
+ textColor='#162741'
+ rounded
+ totalWidth={deviceWidth*0.18}
+ totalHeight={deviceHeight*0.065}
+ onChange={value => sethours(value)} />
+<Text style={{alignSelf:'center', fontSize:20}}>:</Text>
+<NumericInput type='up-down'
+ minValue={0}
+ 
+ maxValue={60}
+ textColor='#162741'
+ rounded
+ totalWidth={deviceWidth*0.18}
+ totalHeight={deviceHeight*0.065}
+ 
+ onChange={value2 => setminutes(value2)} />
+
+{timeAmPM == true?
+<Ionicons onPress={()=> {settimeAmPM(false)}} name='radio-button-off' style={{alignSelf:'center'}} size={35} color='#E3E3EB'/>
+:
+<Ionicons onPress={()=> {settimeAmPM(true)}} name='radio-button-on' style={{alignSelf:'center'}} size={35} color='#162741'/>
+}
+
+<Text style={{alignSelf:'center', color:'#162741', fontSize:15, fontWeight:'500'}}>AM</Text>
+
+{timeAmPM == false?
+<Ionicons  onPress={()=> {settimeAmPM(true)}} name='radio-button-off' style={{alignSelf:'center'}} size={35} color='#E3E3EB'/>
+:
+<Ionicons  onPress={()=> {settimeAmPM(false)}} name='radio-button-on' style={{alignSelf:'center'}} size={35} color='#162741'/>
+}
+<Text style={{alignSelf:'center',color:'#162741', fontSize:15, fontWeight:'500'}}>PM</Text>
 
    </View>
 
-   <View style={{width:'100%',paddingVertical:15,flexDirection:'row', paddingHorizontal:25,justifyContent:'space-between'}}>
-   <TouchableOpacity onPress={()=> {setsavemodal(false)}} style={{marginTop:10, borderRadius:5, justifyContent:'center',borderWidth:1,borderColor:'E3E3EB' ,height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
-          <Text style={{color:'black',fontSize:16,fontWeight:'500', alignSelf:'center'}}>No</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=> {setsavemodal(false)}} style={{marginTop:10, backgroundColor:'#162741',borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
-          <Text style={{color:'white',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Yes</Text>
-        </TouchableOpacity>
+   <View style={{width:'100%',borderBottomRightRadius:5,borderBottomLeftRadius:5, backgroundColor:'#EDEDF6',paddingVertical:15, paddingHorizontal:20,}}>
+    <TouchableOpacity  
+    onPress={()=> {settimemodal2(false)}}
+    style={{backgroundColor:'#162741',justifyContent:'center', height:40,borderRadius:5, width:'35%', alignSelf:'flex-end'}}>
+      <Text style={{fontSize:15,alignSelf:'center', fontWeight:'500', color:'white'}}>Apply</Text>
+
+
+    </TouchableOpacity>
+
    </View>
-  
 
 
    
@@ -613,10 +646,76 @@ onRequestClose={() => {
   </View>
 
 </View>
-</Modal>
+      </Modal>
 
 
-<Modal
+      <Modal
+      transparent={true}
+      animationType={'fade'}
+      visible={savemodal}
+      onRequestClose={() => {
+
+        console.log('close modal');
+      }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          paddingVertical: 10,
+          height:deviceHeight,
+          backgroundColor:'#0009',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            width: '75%',
+            paddingVertical:10,
+            flexDirection: 'column',
+            backgroundColor:'white',
+            borderRadius:5,
+          }}>
+
+
+      <View style={{paddingHorizontal:25,justifyContent:'flex-start', flexDirection:'row', paddingVertical:7, }}>
+
+        
+          <View>
+        <Text style={{alignSelf:'center',fontSize:15, fontWeight:'700', paddingVertical:7,}}>Post stream</Text>
+          </View>
+
+          
+      </View>
+
+      
+
+
+      <View style={{width:'100%', paddingVertical:7, paddingHorizontal:25,}}>
+        <Text style={{fontSize:15, fontWeight:'400'}}>Would you like to post the stream?</Text>
+
+        </View>
+
+        <View style={{width:'100%',paddingVertical:15,flexDirection:'row', paddingHorizontal:25,justifyContent:'space-between'}}>
+        <TouchableOpacity onPress={()=> {setsavemodal(false)}} style={{marginTop:10, borderRadius:5, justifyContent:'center',borderWidth:1,borderColor:'E3E3EB' ,height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
+                <Text style={{color:'black',fontSize:16,fontWeight:'500', alignSelf:'center'}}>No</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> {setsavemodal(false)}} style={{marginTop:10, backgroundColor:'#162741',borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
+                <Text style={{color:'white',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Yes</Text>
+              </TouchableOpacity>
+        </View>
+        
+
+
+        
+      
+        </View>
+
+      </View>
+      </Modal>
+
+
+
+      <Modal
 
 transparent={true}
 animationType={'fade'}
@@ -675,10 +774,10 @@ onRequestClose={() => {
 <FlatList
          contentInsetAdjustmentBehavior="automatic"
          data={data}
+  
          contentContainerStyle={{height:'100%' ,width:'100%', marginTop:0, alignSelf:'center', paddingHorizontal:2,  }}
          renderItem={renderLivenow}
          keyExtractor={(item,id) => id.toString()}
-         extraData={data}
          />  
          
    </View>
@@ -706,7 +805,7 @@ elevation: 5,
         </View>
 
         <View style={{paddingVertical:2, paddingHorizontal:20,flexDirection:'row',  justifyContent:'space-between',width:'100%'}}>
-        <TouchableOpacity onPress={()=> {setlinkedProduct(false); navigation.navigate('AddProduct')}} style={{marginTop:10,borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.4,}}>
+        <TouchableOpacity onPress={()=> {validation()}} style={{marginTop:10,borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.4,}}>
           <Text style={{color:'#162741',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Add new products</Text>
         </TouchableOpacity>
 
@@ -722,6 +821,7 @@ elevation: 5,
 
 </Modal>
 
+
       
 
 
@@ -729,7 +829,7 @@ elevation: 5,
 
       <MaterialIcons  onPress={()=> {navigation.goBack()}} name='arrow-back'  size={25} color='#616B7B'/>
   
-      <Text style={{fontWeight:'500', fontSize:18}}>Upload a video</Text>
+      <Text style={{fontWeight:'500', fontSize:18}}>Add Product</Text>
 
 <View>
 
@@ -747,70 +847,110 @@ elevation: 5,
           <ScrollView>
 
 
+          {/* <Button title={'open'} onPress={openDatePicker}/> */}
+     
+
+          {/* <Button title="Open" onPress={() => setOpen(true)} />
+      <DatePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={(date) => {
+          setOpen(false)
+          setDate(date)
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      /> */}
+
+
+<DatePicker
+        isVisible={showDatePicker}
+        mode={'single'}
+        onCancel={onCancel}
+        onConfirm={onConfirm}
+        colorOptions={colorOptions}
+
+      />
 
 
 
-        <Text style={{fontSize:18, fontWeight:'500'}}>Stream details</Text>
 
-        <Text style={{marginTop:20}}>Stream name</Text>
-      
+        <Text style={{fontSize:16, fontWeight:'500',justifyContent:'center', color:'#162741'}}>Product Details</Text>
+
+
+      <View style={{borderWidth:1,borderColor:'#E3E3EB', height:deviceHeight*0.23, padding:5, marginHorizontal:'20%',marginTop:20, borderRadius:5,}}>
+        <View style={{backgroundColor:'#F7F7F7',height:'100%', justifyContent:'center' }}>
+
+
+<ImageBackground style={{width:'100%', height:'90%', alignSelf:'center'}} source={require('../images/image10b.png')}/>
+
+
+
+  {/* <View style={{width:20,height:20,alignSelf:'flex-end', backgroundColor:'white'}}>
+          </View> */}
+          </View>
+
+        
+          <View style={{shadowColor: "#00000040",
+shadowOffset: {
+width: 5,
+height: 2,
+},
+shadowOpacity: 0.25,
+shadowRadius: 3.84,
+backgroundColor:'white',
+alignSelf:'flex-end',elevation:10, width:45,height:45, justifyContent:'center', borderRadius:400/2,color:'white',marginTop:-20,marginRight:-20, padding:5}}>
+{/* <Image  style={{width:30,height:30, alignSelf:'center',}} source={require('../images/camera_img.png')}/> */}
+<SvgUri
+                          style={{alignSelf:'center',}}
+                          source={require('../images/gLive_Icons/Profile/change_profile_pic_icon.svg')}
+                        />
+                        </View>
+
+      </View>  
+
+
+
+
+        <Text style={{marginTop:20}}>Name</Text>
 
         <TextInput
-      placeholder='ex. Product showcase'
+      placeholder='Product Name'
       mode='outlined'
       style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, }}
      
       />
-       <Text style={{marginTop:20}}>Description</Text>
 
 
 
-      <View style={{borderWidth:1,height:100, marginTop:20,justifyContent:'flex-start', borderColor:'#E3E3EB', borderRadius:5, }}>
 
-              <TextInput
-      placeholder='video description'
-      mode='outlined'
-      multiline={true}
-      style={{paddingHorizontal:10,height:'100%', borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, }}
+          <Text style={{marginTop:20}}>Product Description</Text>
+
+          <TextInput
+          placeholder='ex. Men’s Running Shoes'
+          mode='outlined'
+          style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, }}
+
+          />
+
+
+
+
+
      
-      />
 
-      </View>
 
-      <Text style={{marginTop:15, fontSize:16, fontWeight:'400'}}>Category</Text>
+{/* <ModalDropdown 
+dropdownStyle={{alignSelf:'center',marginTop:10,paddingVertical:1, width:'90%'}}
+defaultValue='     Select language'
+textStyle={{fontSize:14,fontWeight:'400'}}
 
-      <DropDownPicker
-      open={catdropdown}
-      value={catvalue}
-      items={catdropdownvalue}
-      placeholder="Select Category"
-      setOpen={setcatdropdown}
-      setValue={setcatdropdownvalue}
-      textStyle={{
-        fontSize: 15,
-        color:'#162741'
+style={{borderWidth:1,justifyContent:'center', marginTop:20,borderColor:'#E3E3EB', paddingHorizontal:0, borderRadius:5,height:40}}
+options={['option 1', 'option 2']}>
 
-      }}
-    
-      style={{
-        borderColor:'#E3E3EB',
-        marginTop:20,
-        marginBottom:catdropdown == true ? '30%': '0%',
-        
-      }}
-      dropDownContainerStyle={{
-       
-        marginBottom:catdropdown == true ? '30%': '0%',
-        marginTop:catdropdown == true ? 15: 0,
-        borderWidth:1,
-       borderColor: '#E3E3EB',
-      }}
-      containerStyle={{
-        
-        borderColor:'#E3E3EB'
-      }}
-      setItems={setItems}
-    />
+  </ModalDropdown> */}
 
 
 {/* <DropDownPicker
@@ -836,31 +976,27 @@ setItems={setItems}
 /> */}
 
 
-            <Text style={{marginTop:20, fontWeight:'400',fontSize:16}}>Stream language</Text>
+            <Text style={{marginTop:20,color:'#162741', fontSize:16,fontWeight:'400'}}>Category</Text>
 
 
             <DropDownPicker
-      open={langdropdown}
-      value={langvalue}
-      items={langdropdownvalue}
-      placeholder="Select language"
-      setOpen={setlangdropdown}
-      setValue={setlangdropdownvalue}
-      textStyle={{
-        fontSize: 15,
-        color:'#162741'
-
-      }}
+      open={open}
+      value={value}
+      items={items}
+      placeholder="Select category"
+      setOpen={setOpen}
+      setValue={setValue}
+      defaultValue='sd'
       style={{
         borderColor:'#E3E3EB',
         marginTop:20,
-        marginBottom:langdropdown == true ? '30%': '0%',
+        marginBottom:open == true ? '30%': '0%',
         
       }}
       dropDownContainerStyle={{
        
-        marginBottom:langdropdown == true ? '30%': '0%',
-        marginTop:langdropdown == true ? 15: 0,
+        marginBottom:open == true ? '30%': '0%',
+        marginTop:open == true ? 15: 0,
         borderWidth:1,
        borderColor: '#E3E3EB',
       }}
@@ -868,185 +1004,102 @@ setItems={setItems}
         
         borderColor:'#E3E3EB'
       }}
-      setItems={setItems}
+      
+      // setItems={setItems}
     />
-            {/* <ModalDropdown 
-dropdownStyle={{alignSelf:'center',marginTop:10,paddingVertical:1, width:'90%'}}
-defaultValue='     Select language'
-textStyle={{fontSize:14,fontWeight:'400'}}
-
-style={{borderWidth:1,justifyContent:'center', marginTop:20,borderColor:'#E3E3EB', paddingHorizontal:0, borderRadius:5,height:40}}
-options={['option 1', 'option 2']}>
-
-  </ModalDropdown> */}
-            {/* <DropDownPicker
-      open={open}
-      value={value}
-      items={items}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
-      style={{borderWidth:1,marginTop:20, borderColor:'#E3E3EB', borderRadius:5, }}
-     
-    /> */}
-                  <Text style={{marginTop:20, fontSize:16, fontWeight:'400'}}>Image*</Text>
-
-{/* {video == null ?
-                  <View style={{borderColor:'#E3E3EB',borderWidth:1, borderRadius:5, padding:30, height:deviceHeight*0.2,width:"100%", flexDirection:'row',justifyContent:'center', marginTop:20, backgroundColor:'#ebebeb',}}>
-
-
-                    <TouchableOpacity onPress={()=> {selectVideo()}} style={{height:'100%',justifyContent:'center', borderWidth:1,borderRadius:7, borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'85%'}}>
-
-                      <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
-                      <SvgUri
-                          style={{alignSelf:'center',}}
-                          source={require('../images/gLive_Icons/Schedule/browse_photo_icon.svg')}
-                        />
-
-                    <Text style={{alignSelf:'center',fontWeight:'400'}}>Upload Video</Text>
-                      </View>
-
-
-                    </TouchableOpacity>
-
-                 
-
-                    </View>
-
-                    :
-                    <View style={{padding:5,backgroundColor:'#ebebeb', borderRadius:5,marginTop:5}}>
-
-                    <VideoPlayer
-                        video={{ uri: video }}
-                        
-                        videoWidth={1600}
-                        videoHeight={900}
-                        thumbnail={{ uri: 'https://i.picsum.photos/id/866/1600/900.jpg' }}
-                    />
-
-                    </View>
-                    
-                  //   <ImageBackground imageStyle={{borderRadius:5}} source={{uri:img}} style={{borderColor:'#E3E3EB', height:deviceHeight*0.2,width:"100%", flexDirection:'row', justifyContent:'flex-end', marginTop:20, }}>
-
-                  //     <TouchableOpacity onPress={()=>{setimg(null)}} style={{alignSelf:'flex-start',margin:10,}}>
-                  // <SvgUri
-                  //         style={{alignSelf:'flex-start',}}
-                  //         source={require('../images/gLive_Icons/Schedule/remove_image_icon.svg')}
-                  //       />
-
-                  //       </TouchableOpacity>
-                  //     </ImageBackground>
 
 
 
-                    } */}
-
-{img == null ?
-                  <View style={{borderColor:'#E3E3EB',borderWidth:1, borderRadius:5, padding:30, height:Platform.OS == 'ios'? deviceHeight*0.2:deviceHeight*0.25,width:"100%", flexDirection:'row',justifyContent:'space-between', marginTop:20, backgroundColor:'#ebebeb',}}>
-
-
-                    <TouchableOpacity onPress={()=> {chooseFile()}} style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'45%'}}>
-
-                      <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
-                      <SvgUri
-                          style={{alignSelf:'center',}}
-                          source={require('../images/gLive_Icons/Schedule/browse_photo_icon.svg')}
-                        />
-
-                    <Text style={{alignSelf:'center',fontWeight:'400'}}>Browse photo</Text>
-                      </View>
-
-
-                    </TouchableOpacity>
-
-                    <TouchableOpacity  
-                    onPress={()=>{TakePhoto()}}
-                    style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'45%'}}>
-                    
-                    <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
-                    <SvgUri
-                          style={{alignSelf:'center',}}
-                          source={require('../images/gLive_Icons/Schedule/take_photo_icon.svg')}
-                        />
-                    <Text style={{alignSelf:'center',fontWeight:'400'}}>Take photo</Text>
-                      </View>
-
-                      
-                    </TouchableOpacity>
-
-
-                    </View>
-
-                    :
+                    <Text style={{marginTop:20, fontSize:16,}}>Price</Text>
 
                     
-                    <ImageBackground imageStyle={{borderRadius:5}} source={{uri:img}} style={{borderColor:'#E3E3EB', height:Platform.OS == 'ios'? deviceHeight*0.2:deviceHeight*0.25,width:"100%", flexDirection:'row', justifyContent:'flex-end', marginTop:20, }}>
+      <View style={{flexDirection:'row', justifyContent:'space-between'}} >
 
-                      <TouchableOpacity onPress={()=>{setimg(null)}} style={{alignSelf:'flex-start',margin:10,}}>
-                  <SvgUri
-                          style={{alignSelf:'flex-start',}}
-                          source={require('../images/gLive_Icons/Schedule/remove_image_icon.svg')}
-                        />
+<View style={{width:'45%'}}>
 
-                        </TouchableOpacity>
-                      </ImageBackground>
-
-
-
-                    }
-
-
-                    
+      <DropDownPicker
+      open={priceopen}
+      value={pricevalue}
+      items={priceitems}
+      placeholder="GPB"
+      setOpen={setpriceOpen}
+      setValue={setpricevalue}
+      defaultValue='sd'
+      style={{
+        borderColor:'#E3E3EB',
+        marginTop:20,
+        marginBottom:priceopen == true ? '30%': '0%',
+        
+      }}
+      dropDownContainerStyle={{
+       
+        marginBottom:priceopen == true ? '30%': '0%',
+        marginTop:priceopen == true ? 15: 0,
+        borderWidth:1,
+       borderColor: '#E3E3EB',
+      }}
+      containerStyle={{
+        
+        borderColor:'#E3E3EB'
+      }}
       
+      // setItems={setItems}
+    />
+      </View>
+
+
+<TouchableOpacity onPress={()=> {settimemodal(true)}} style={{borderWidth:1, width:'45%',borderRadius:5,marginTop:20, borderColor:'#E3E3EB', height:50,paddingHorizontal:10, flexDirection:'row', }}>
 
 
 
-      <View style={{height:2, width:'100%',marginTop:20, backgroundColor:'#E3E3EB'}}>
-        </View>
+
+    <Text style={{alignSelf:'center', fontSize:16, fontWeight:'400', color:'#7D8696'}}>00.00</Text>
 
 
-
-
-        <Text style={{marginTop:20, fontWeight:'500',fontSize:18}}>Linked products</Text>
-
-        <Text style={{marginTop:20, fontSize:16,fontWeight:'400'}}>Add products to your stream</Text>
-
-
-      
-      <View style={{width:'100%',marginTop:20, flexDirection:'row',justifyContent:'space-between'}} >
-
-      <View style={{borderWidth:1,width:'85%',alignItems:'center', borderRadius:5,borderColor:'#E3E3EB', height:50,paddingHorizontal:10, flexDirection:'row', }}>
-
-
-        <Text style={{alignSelf:'center', fontSize:16, fontWeight:'400', color:'#7D8696'}}>2 products selected</Text>
-
+</TouchableOpacity>
     
 
         </View>
 
-        <TouchableOpacity 
-        onPress={()=> {setlinkedProduct(true)}}
-        style={{height:40,alignSelf:'center', justifyContent:'center', width:40,borderRadius:400/2,  }}>
-          {/* <AntDesign  style={{alignSelf:'center'}} name='plus' size={22} color='black' /> */}
-          <SvgUri
-                          style={{alignSelf:'center',}}
-                          source={require('../images/gLive_Icons/UploadVideo/add_products_icon.svg')}
-                        />
-          </TouchableOpacity>
+            <View style={{flexDirection:'row',marginTop:30,justifyContent:'flex-start'}}>
+              
+              {decided == false ?
+               <TouchableOpacity  onPress={()=>{setdecided(true)}} style={{borderColor:'#162741',marginLeft:5, alignSelf:'center',borderRadius:3, borderWidth:1.5, height:18,width:18}}>
+
+                </TouchableOpacity>
+                :
+                // <TouchableOpacity  onPress={()=>{}} style={{borderColor:'#162741',marginLeft:5, alignSelf:'center',borderRadius:3, borderWidth:1.5, height:18,width:18}}>
+                    <Ionicons onPress={()=>{setdecided(false)}}  name='ios-checkbox-sharp' size={19.5} color='#162741' style={{marginLeft:5, borderRadius:3, alignSelf:'center',}}/>
+                // </TouchableOpacity> 
+              }
+
+        <Text style={{alignSelf:'center',marginLeft:10,color:'#162741', fontSize:16, fontWeight:'400'}}>Display in catalogue (public)</Text>
 
           </View>
-          
-
-
-
-
-
     
 
-        <View style={{marginTop:30,}}>
+
+
+
+      
+      
+   
+          
+
+       
+
+        <View >
+
+     
+          </View>
+
+
+        <View style={{marginTop:30,height:70}}>
 
         </View>
 
+
+       
         {/* <View style={{height:2,
                       
                       shadowColor: "#D5D5EC",
@@ -1091,14 +1144,13 @@ elevation: 5,
                       alignSelf:'center', width:deviceWidth, backgroundColor:'#E3E3EB'}}>
         </View>
 
-        <View style={{paddingVertical:2,paddingHorizontal:2,flexDirection:'row', justifyContent:'space-between', width:'100%'}}>
-        <TouchableOpacity onPress={()=> {navigation.navigate('BuyerPreview')}} style={{marginTop:10,borderColor:'#E3E3EB',borderWidth:1, borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.23,}}>
-          <Text style={{color:'white',fontSize:16,fontWeight:'500',color:'#162741', alignSelf:'center'}}>Preview</Text>
-        </TouchableOpacity>
+        <View style={{paddingVertical:2,flexDirection:'row', paddingHorizontal:2, justifyContent:'space-between',width:'100%'}}>
 
-        
-        <TouchableOpacity onPress={()=> {validation()}} style={{marginTop:10,borderColor:'#162741', backgroundColor:'#162741',borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.23,}}>
-          <Text style={{color:'white',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Post</Text>
+        <View>
+          </View>
+
+        <TouchableOpacity onPress={()=> {validation()}} style={{marginTop:10, backgroundColor:'#162741',borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
+          <Text style={{color:'white',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Save</Text>
         </TouchableOpacity>
 
         </View>
@@ -1108,11 +1160,11 @@ elevation: 5,
   
   
         </SafeAreaView>
-      
+      // </TouchableWithoutFeedback>
     );
 }
 
-export default Uploadavideo;
+export default AddProducts;
 
 
 const styles = StyleSheet.create({

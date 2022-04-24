@@ -244,7 +244,7 @@ onPress={()=> {seteditmodal(false)}}
         </TouchableOpacity>
 
         <TouchableOpacity 
-        onPress={()=> {seteditmodal(false); navigation.navigate('schedulealivestreamgolive')}}
+        onPress={()=> {seteditmodal(false); navigation.navigate('Editschedulealivestream')}}
         style={{width:'90%', flexDirection:'row', alignSelf:'center'}}>
       <SvgUri
                           style={{alignSelf:'center',marginLeft:10,}}
@@ -288,7 +288,7 @@ onPress={()=> {seteditmodal(false)}}
 
 
         <TouchableOpacity 
-        onPress={()=> {navigation.navigate('LiveStream')}}
+        onPress={()=> {navigation.navigate('schedulealivestreamgolive')}}
         style={{borderRadius:5,height:50,marginTop:15, flexDirection:'row', justifyContent:'center', backgroundColor:'#E91327'}}>
 
 

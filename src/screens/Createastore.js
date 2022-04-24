@@ -12,7 +12,8 @@ import {
     TextInput,
     Image,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -40,6 +41,7 @@ const Createastore = ({route ,navigation }) => {
   const [Rolecheck , setRolecheck] = useState(AppConstance.ROLE)
   const [type, settype]= useState(3)
   const [type1, settype1]= useState(0)
+  const [index ,setindex]= useState(0)
   const [Invitation,setInvitation ] = useState(0)
  const [open, setOpen] = useState(false)
  const [value, setValue] = useState('Select language');
@@ -97,17 +99,17 @@ useEffect(() => {
 </View>
   </Appbar>
 
-  <Pages   indicatorColor='red'>
+  {/* <Pages   indicatorColor='red'> */}
 
 
-
+{index == 0 ?
         <View style={{ flex: 1, }} >
           <ScrollView style={{marginBottom:40,}}>
 
             <Text style={{color:'#162741',marginTop:30, alignSelf:'center', fontSize:18,fontWeight:'500', }}>Who is the account for?</Text>
             <Text style={{color:'#162741B2',alignSelf:'center', marginTop:20,fontSize:14,fontWeight:'500', }}>Select how do you plan on using gLive</Text>
 
-            <View style={{ borderRadius:5, padding:30, height:deviceHeight*0.2,width:"100%", flexDirection:'row',justifyContent:'space-evenly', marginTop:15, backgroundColor:'white',}}>
+            <View style={{ borderRadius:5, padding:30, height:Platform.OS == 'ios'? deviceHeight*0.2:deviceHeight*0.25,width:"100%", flexDirection:'row',justifyContent:'space-evenly', marginTop:15, backgroundColor:'white',}}>
 
 
                     <TouchableOpacity onPress={()=> { settype1(0)}} style={{height:'100%',borderRadius:5, justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:type1==0?'#E91327':'white', width:'40%'}}>
@@ -255,8 +257,7 @@ useEffect(() => {
 
         </View>
 
-
-
+: index == 1 ?
 
         <View style={{ flex: 1, }} >
 
@@ -387,7 +388,7 @@ backgroundColor:'white',
 
         </View>
 
-
+: 
 
         <View style={{ flex: 1, }} >
           <ScrollView style={{marginBottom:40, paddingHorizontal:30,}}>
@@ -544,9 +545,32 @@ Invitation sent
 
         </View>
 
+}
+
+      {/* </Pages> */}
 
 
-      </Pages>
+    <View style={{width:deviceWidth, backgroundColor:'white',flexDirection:'row',justifyContent:'center', height:20}}>
+      <TouchableOpacity 
+      onPress={()=> {setindex(0)}}
+      style={{borderRadius:400/2,height:12,width:12, backgroundColor:index == 0 ?'red': '#e3e3eb'}}>
+
+      </TouchableOpacity>
+      <TouchableOpacity 
+      onPress={()=> {setindex(1)}}
+      style={{borderRadius:400/2,height:12,width:12,marginLeft:10, backgroundColor:index == 1 ? 'red': '#e3e3eb'}}>
+
+      </TouchableOpacity>
+      <TouchableOpacity 
+      onPress={()=> {setindex(2)}}
+      style={{borderRadius:400/2,height:12,width:12,marginLeft:10, backgroundColor:index == 2 ? 'red':  '#e3e3eb'}}>
+
+      </TouchableOpacity>
+
+      </View>
+
+
+
 
          <View style={{height:2,
                       
@@ -565,13 +589,36 @@ elevation: 5,
 
 
         <View style={{paddingVertical:10,flexDirection:'row', paddingHorizontal:20,marginTop:10, justifyContent:'space-between',width:'100%'}}>
-
+{index == 0?
 <TouchableOpacity onPress={()=> { navigation.goBack()}} style={{marginTop:10, borderColor:'#E3E3EB',borderWidth:1,borderRadius:5, justifyContent:'center',paddingVertical:10,   width:'30%'}}>
   <Text style={{color:'#162741',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Cancel</Text>
 </TouchableOpacity>
 
+: index ==  1?
+<TouchableOpacity onPress={()=> {setindex(0)}} style={{marginTop:10, borderColor:'#E3E3EB',borderWidth:1,borderRadius:5, justifyContent:'center',paddingVertical:10,   width:'30%'}}>
+  <Text style={{color:'#162741',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Back</Text>
+</TouchableOpacity>
+: 
+<TouchableOpacity onPress={()=> { setindex(1)}} style={{marginTop:10, borderColor:'#E3E3EB',borderWidth:1,borderRadius:5, justifyContent:'center',paddingVertical:10,   width:'30%'}}>
+  <Text style={{color:'#162741',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Back</Text>
+</TouchableOpacity>
+}
 
-<TouchableOpacity onPress={()=> { setEditmember(false)}} style={{marginTop:10, backgroundColor:'#162741',borderRadius:5, justifyContent:'center',paddingVertical:10, width:'30%'}}>
+
+<TouchableOpacity onPress={()=> { 
+
+  if(index == 0){
+    
+    setindex(1)
+  }else if(index == 1){
+    setindex(2)
+  }else if(index == 2){
+    setindex(0)
+  }
+
+  // setEditmember(false)
+}
+  } style={{marginTop:10, backgroundColor:'#162741',borderRadius:5, justifyContent:'center',paddingVertical:10, width:'30%'}}>
   <Text style={{color:'white',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Next</Text>
 </TouchableOpacity>
 

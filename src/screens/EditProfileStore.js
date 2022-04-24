@@ -36,6 +36,7 @@ import Appcolors from '../AppColors/Appcolors.js';
 import App from '../../App.js';
 import Icon from 'react-native-vector-icons'
 import SvgUri from 'react-native-svg-uri'; // SVG Package
+import DropDownPicker from 'react-native-dropdown-picker';
 
 import RNPopover from 'react-native-popover-menu';
 
@@ -50,7 +51,7 @@ const  images1= [
   "https://source.unsplash.com/1024x768/?tree",
 ]
 
-const ProfileStore = ({route, navigation }) => {
+const EditProfileStore = ({route, navigation }) => {
 
   const [Productsvisible,setProductsvisible] = useState(false)
   const [login , setlogin] =useState(true)
@@ -58,6 +59,12 @@ const ProfileStore = ({route, navigation }) => {
 const [plus, setPlus] = useState(false);
 const [search , setsearch]= useState(true)
 const openMenu = () => setPlus(true);
+const [catdropdown,setcatdropdown] = useState(false)
+  const [catdropdownvalue,setcatdropdownvalue] = useState([
+    {label: 'Clothing', value: 'Clothing'},
+    {label: 'Electronics', value: 'Electronics'}
+  ])
+  const [catvalue, setcatvalue] = useState('Atheltic Footwear');
 
 const closeMenu = () => setPlus(false);
 
@@ -377,211 +384,219 @@ onRequestClose={() => {
 </View>
       </Modal>
 
-        <Appbar style={styles.appbar}>
+      <Appbar style={styles.appbar}>
+
+      <MaterialIcons  onPress={()=> {navigation.goBack()}} name='arrow-back'  size={25} color='#616B7B'/>
   
-        <View 
-            style={{alignContent:"center",flexDirection:'row',justifyContent:'space-between',width:'100%', alignItems:"center"}}   >
+      <Text style={{fontWeight:'500', fontSize:18}}>Profile</Text>
 
-           <View>
+<View>
 
-             </View>
-
-             <View>
-
-            </View>
-
-      <View style={{flexDirection:'row', }}>
-      
-      {login == true?
-            <TouchableOpacity
-            style={{marginRight:15,}}
-              onPress={()=> {
-               navigation.navigate('Setting')
-              }}
-              >
-               
-              <Image style={{width:25, height:25}} source={require('../images/Combined-Shape.png')}/>              
-              </TouchableOpacity>
-              : null
-              
-            }
-          
-              
-       {  role == 1 ?   
-       
-        <Menu
-          visible={plus}
-          onDismiss={closeMenu}
-          style={{marginTop:30 ,}}
-          anchor={    <TouchableOpacity
-            // style={{marginRight:15,}}
-
-onPress={()=> {
-openMenu()              }}
->
-
-<AntDesign   name='pluscircleo' size={25} color={'#616B7B'} />
-
-</TouchableOpacity>}
-          
-          >
-          <Menu.Item  style={{backgroundColor:'red' , }} onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" />
-          <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
-          <Divider />
-          <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
-        </Menu>
-        :
-
-        role == 0 ?     
-        <Menu
-          visible={plus}
-          onDismiss={closeMenu}
-          style={{marginTop:30,}}
-          anchor={    <TouchableOpacity
-            // style={{marginRight:15,}}
-
-onPress={()=> {
-openMenu()              }}
->
-
-<AntDesign   name='pluscircleo' size={25} color={'#616B7B'} />
-
-</TouchableOpacity>}
-          
-          >
-          <Menu.Item  style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" />
-          <Divider />
-          <Menu.Item style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
-          <Divider />
-          <Menu.Item style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
-        </Menu>
-
-        :
-        null
-
-        }
-                </View>
-              
-            </View>
-  
-  
-        <View style={{alignSelf:'center', }}>
-            
-  
-        </View>
-  
+  <Text></Text>
+</View>
         </Appbar>
 
 
         <View style={styles.body}>
        
+   <ScrollView>
+            
+   <Text style={{color:'#162741', fontWeight:'600',paddingHorizontal:30, fontSize:16}}>Store Details</Text>
+
+        <View style={{ borderRadius:5, padding:30, width:"100%", flexDirection:'row',justifyContent:'space-evenly', marginTop:15, backgroundColor:'white',}}>
+
+
+
+<View style={{paddingVertical:7,width:'20%',justifyContent:'center', flexDirection:'row'}}>
+
+
+
+<ImageBackground  
+imageStyle={{borderRadius:400/2,borderWidth:1,borderColor:'#E3E3EB'}}
+style={{width: 130, height: 130,justifyContent:'flex-end'}} 
+
+
+source={require('../images/image5.png')}>
+
+
+
+<View style={{shadowColor: "#00000040",
+shadowOffset: {
+width: 5,
+height: 2,
+},
+shadowOpacity: 0.25,
+shadowRadius: 3.84,
+backgroundColor:'white',
+alignSelf:'flex-end',elevation:5, width:50,height:50, justifyContent:'center', borderRadius:400/2,color:'white', padding:5}}>
+{/* <Image  style={{width:30,height:30, alignSelf:'center',}} source={require('../images/camera_img.png')}/> */}
+<SvgUri
+                          style={{alignSelf:'center',}}
+                          source={require('../images/gLive_Icons/Profile/change_profile_pic_icon.svg')}
+                        />
+</View>
+
+</ImageBackground>
+
+</View>
+
+</View>
+               
+
+              <View style={{marginTop:20, paddingHorizontal:30}}>
+                <Text style={{color:'#162741', fontWeight:'400', fontSize:16}}>Store Name</Text>
+                <TextInput
+                  placeholder='Nike, Inc.'
+                  value='Nike, Inc.'
+                  mode='outlined'
+                  style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#D0D0DE99', borderRadius:5, }}
+                
+                  />
+                </View>
+
+                <View style={{marginTop:20, paddingHorizontal:30}}>
+                <Text style={{color:'#162741', fontWeight:'400', fontSize:16}}>Description</Text>
+                <View style={{borderWidth:1,height:100, marginTop:20, marginHorizontal:0, justifyContent:'flex-start', borderColor:'#E3E3EB', borderRadius:5, }}>
+
+                <TextInput
+                placeholder='Livestream description'
+                mode='outlined'
+                value='NIKE, Inc., together with its subsidiaries, designs, develops, markets, and sells athletic footwear, apparel, equipment, and accessories worldwide.'
+                multiline={true}
+                style={{paddingHorizontal:10,height:'100%', borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, }}
+
+                />
+
+                </View>
+
+                </View>
+
+                <View style={{marginTop:20, paddingHorizontal:30}}>
+                <Text style={{color:'#162741', fontWeight:'400', fontSize:16}}>Category</Text>
+                
+      <DropDownPicker
+      open={catdropdown}
+      value={catvalue}
+      items={catdropdownvalue}
+      
+      placeholder="Atheltic Footwear"
+      setOpen={setcatdropdown}
+      setValue={setcatdropdownvalue}
+      textStyle={{
+        fontSize: 15,
+        color:'#162741'
+
+      }}
+      style={{
+        borderColor:'#E3E3EB',
+        marginTop:20,
+        marginBottom:catdropdown == true ? '30%': '0%',
+        
+      }}
+      dropDownContainerStyle={{
        
-       <View style={{flexDirection:'row',marginTop:20,justifyContent:'space-between', paddingHorizontal:30,}}>
+        marginBottom:catdropdown == true ? '30%': '0%',
+        marginTop:catdropdown == true ? 15: 0,
+        borderWidth:1,
+       borderColor: '#E3E3EB',
+      }}
+      containerStyle={{
+        
+        borderColor:'#E3E3EB'
+      }}
+      
+      // setItems={setItems}
+    />
 
-        <View style={{flexDirection:'row'}}> 
-         <Image style={{width:70, height:70}} source={require('../images/image5.png')}/>
-         <View style={{justifyContent:'center'}}>
-          <Text style={{color:'#162741',fontWeight:'500', fontSize:18, marginLeft:10,}}>Nike, Inc.</Text>
-          <Text style={{color:'#162741',alignSelf:'center',color:'#616B7B', fontWeight:'400', fontSize:14, marginLeft:10,}}>Athletic Footwear</Text>
-          </View>
+<View style={{height:2,marginTop:30, width:'100%', backgroundColor:'#E3E3EB'}}>
         </View>
+                </View>
 
-        <TouchableOpacity 
-           onPress={()=> {navigation.navigate('EditProfileStore')}}
 
-        style={{alignSelf:'center'}}>
-          <Text style={{fontWeight:'600',fontSize:18, color:'#1C54DB'}}>Edit</Text>
 
-        </TouchableOpacity>
-         </View>
+
+
+                <Text style={{color:'#162741',paddingHorizontal:30,marginTop:20,color:'#162741', fontWeight:'500', fontSize:18}}>Linked Accounts</Text>
+
+
+                <View style={{marginTop:20, paddingHorizontal:30}}>
+                <Text style={{color:'#162741', fontWeight:'400', fontSize:16}}>Website</Text>
+                <TextInput
+                  placeholder='http://nike.com'
+                  value='http://nike.com'
+                  mode='outlined'
+                  style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#D0D0DE99', borderRadius:5, }}
+                
+                  />
+                </View>
+
+
+
+                <View style={{marginTop:20, paddingHorizontal:30}}>
+                <Text style={{color:'#162741', fontWeight:'400', fontSize:16}}>Instagram</Text>
+                <TextInput
+                  placeholder='instagram.com/nike'
+                  value='instagram.com/nike'
+                  mode='outlined'
+                  style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#D0D0DE99', borderRadius:5, }}
+                
+                  />
+                </View>
+
+
+                <View style={{marginTop:20, paddingHorizontal:30}}>
+                <Text style={{color:'#162741', fontWeight:'400', fontSize:16}}>Facebook</Text>
+                <TextInput
+                  placeholder='facebook.com/nike'
+                  value='facebook.com/nike'
+                  mode='outlined'
+                  style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#D0D0DE99', borderRadius:5, }}
+                
+                  />
+                </View>
+
 
             
 
-               <Text style={{color:'#565C66',paddingHorizontal:30,marginTop:20,  fontWeight:'400'}}>NIKE, Inc., together with its subsidiaries, designs, develops, markets, and sells athletic footwear, apparel, equipment, and accessories worldwide.</Text>
-
-
-               <TouchableOpacity 
-   onPress={()=> {navigation.navigate('Livestreams')}}
-   style={{borderColor:'#E3E3EB',marginTop:30, flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1,borderTopWidth:1, height:60,paddingHorizontal:15, width:'100%'}}>
-
-    <View style={{ width:'50%', flexDirection:'row', }}>
-    <View style={{width:'20%',justifyContent:'center', }}>
-    <SvgUri
-      style={{alignSelf:'center'}}
-      source={require('../images/gLive_Icons/Login/go_live_icon.svg')}
-    />
-    </View>
-      <View style={{marginLeft:15, justifyContent:'center'}}>
-      <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Livestreams</Text>
-    </View>
-    </View>
-
-
-    <View style={{justifyContent:'center'}}>
-      <MaterialIcons name='navigate-next' color='#616B7B' style={{alignSelf:'center'}} size={25}/>
-    </View>
-   
-
-   </TouchableOpacity>
-
-   <TouchableOpacity 
-   onPress={()=> {navigation.navigate('ProfileCatalogue')}}
-   style={{borderColor:'#E3E3EB',marginTop:0, flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1, height:60,paddingHorizontal:15, width:'100%'}}>
-
-    <View style={{ width:'50%', flexDirection:'row', }}>
-    <View style={{width:'20%',justifyContent:'center', }}>
-    <SvgUri
-      style={{alignSelf:'center'}}
-      source={require('../images/gLive_Icons/Profile/catalogue_icon.svg')}
-    />
-    </View>
-      <View style={{marginLeft:15, justifyContent:'center'}}>
-      <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Catalogue</Text>
-    </View>
-    </View>
-
-
-    <View style={{justifyContent:'center'}}>
-      <MaterialIcons name='navigate-next' color='#616B7B' style={{alignSelf:'center'}} size={25}/>
-    </View>
-   
-
-   </TouchableOpacity>
-   <TouchableOpacity 
-   onPress={()=> {navigation.navigate('ProfileSecond')}}
-   style={{borderColor:'#E3E3EB',marginTop:0, flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1, height:60,paddingHorizontal:15, width:'100%'}}>
-
-    <View style={{ width:'50%', flexDirection:'row', }}>
-    <View style={{width:'20%',justifyContent:'center', }}>
-    <SvgUri
-      style={{alignSelf:'center'}}
-      source={require('../images/gLive_Icons/Settings/account_settings_icon.svg')}
-    />
-    </View>
-      <View style={{marginLeft:15, justifyContent:'center'}}>
-      <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Profile</Text>
-    </View>
-    </View>
-
-
-    <View style={{justifyContent:'center'}}>
-      <MaterialIcons name='navigate-next' color='#616B7B' style={{alignSelf:'center'}} size={25}/>
-    </View>
-   
-
-   </TouchableOpacity>
+                <View style={{height:50}}>
+              <Text></Text>
+                </View>
       
-
+</ScrollView>
 
           </View>
   
   
+          <View style={{height:2,
+                      
+                      shadowColor: "#D5D5EC",
+shadowOffset: {
+	width: 0,
+	height: 2,
+},
+shadowOpacity: 0.25,
+shadowRadius: 3.84,
+
+elevation: 5,
+                      alignSelf:'center', width:deviceWidth, backgroundColor:'#E3E3EB'}}>
+        </View>
+
+        <View style={{paddingVertical:2,flexDirection:'row', paddingHorizontal:30, justifyContent:'flex-end',width:'100%'}}>
+
+     
+
+        <TouchableOpacity onPress={()=> {validation()}} style={{marginTop:10, backgroundColor:'#162741',borderRadius:5, justifyContent:'center', height:deviceHeight*0.05, width:deviceWidth*0.2,}}>
+          <Text style={{color:'white',fontSize:16,fontWeight:'500', alignSelf:'center'}}>Save</Text>
+        </TouchableOpacity>
+
+        </View>
+
         </SafeAreaView>
         </Provider>
     );
 }
 
-export default ProfileStore;
+export default EditProfileStore;
 
 
 const styles = StyleSheet.create({

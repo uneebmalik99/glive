@@ -15,7 +15,8 @@ import {
     Keyboard,
     Modal,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -806,7 +807,7 @@ onRequestClose={() => {
          contentContainerStyle={{height:'100%' ,width:'100%', marginTop:0, alignSelf:'center', paddingHorizontal:2,  }}
          renderItem={renderLivenow}
          keyExtractor={(item,id) => id.toString()}
-         extraData={this.state}
+         extraData={data}
          />  
          
    </View>
@@ -1067,7 +1068,7 @@ options={['option 1', 'option 2']}>
                   <Text style={{marginTop:20}}>Image</Text>
 
 {img == null ?
-                  <View style={{borderColor:'#E3E3EB',borderWidth:1, borderRadius:5, padding:30, height:deviceHeight*0.2,width:"100%", flexDirection:'row',justifyContent:'space-between', marginTop:20, backgroundColor:'#ebebeb',}}>
+                  <View style={{borderColor:'#E3E3EB',borderWidth:1, borderRadius:5, padding:30, height:Platform.OS=='ios'? deviceHeight*0.2:deviceHeight*0.25,width:"100%", flexDirection:'row',justifyContent:'space-between', marginTop:20, backgroundColor:'#ebebeb',}}>
 
 
                     <TouchableOpacity onPress={()=> {chooseFile()}} style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'45%'}}>
@@ -1105,7 +1106,7 @@ options={['option 1', 'option 2']}>
                     :
 
                     
-                    <ImageBackground imageStyle={{borderRadius:5}} source={{uri:img}} style={{borderColor:'#E3E3EB', height:deviceHeight*0.2,width:"100%", flexDirection:'row', justifyContent:'flex-end', marginTop:20, }}>
+                    <ImageBackground imageStyle={{borderRadius:5}} source={{uri:img}} style={{borderColor:'#E3E3EB', height:Platform.OS=='ios'? deviceHeight*0.2:deviceHeight*0.25,width:"100%", flexDirection:'row', justifyContent:'flex-end', marginTop:20, }}>
 
                       <TouchableOpacity onPress={()=>{setimg(null)}} style={{alignSelf:'flex-start',margin:10,}}>
                   <SvgUri
@@ -1191,7 +1192,8 @@ options={['option 1', 'option 2']}>
         <Text style={{alignSelf:'center', fontSize:16, fontWeight:'400', color:'#7D8696'}}>Add products</Text>
 
         <TouchableOpacity 
-        onPress={()=> {setlinkedProduct(true)}}
+        // onPress={()=> {setlinkedProduct(true)}}
+        onPress={()=>{navigation.navigate('AddProducts')}}
         style={{height:40,alignSelf:'center',justifyContent:'center', width:40,borderRadius:400/2, backgroundColor:'#EDEDF6'}}>
           <AntDesign  style={{alignSelf:'center'}} name='plus' size={22} color='black' />
           </TouchableOpacity>

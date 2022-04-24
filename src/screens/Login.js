@@ -60,7 +60,16 @@ navigation.navigate('Discover')
         AppConstance.LOGIN  = 1;
 // 0 for buyer 
         navigation.navigate('buyer')
-      }else{
+      }else if(email == 'test2@hotmail.com'){
+        AppConstance.ROLE = 2;
+        AppConstance.LOGIN  = 1;
+        navigation.navigate('ProfileStore2')
+
+// 2 for seller with store 
+
+      }
+      
+      else{
         AppConstance.LOGIN  = 1;
 
         navigation.navigate('Discover')

@@ -50,7 +50,7 @@ const  images1= [
   "https://source.unsplash.com/1024x768/?tree",
 ]
 
-const BuyerProfile = ({route, navigation }) => {
+const ProfileCatalogue = ({route, navigation }) => {
 
   const [Productsvisible,setProductsvisible] = useState(false)
   const [login , setlogin] =useState(true)
@@ -60,7 +60,16 @@ const [search , setsearch]= useState(true)
 const openMenu = () => setPlus(true);
 
 const closeMenu = () => setPlus(false);
+const [data , setdata] = useState([
+  { id: 1,active:'1', name: 'Post it' },
+  { id: 1, active:'1',name: 'Post it' },
+  { id: 1, active:'0',name: 'Post it' },
+ 
 
+])
+const [PreviousLivestreams, setPreviousLivestreams]= useState(false);
+const [ScheduledLivestreams, setScheduledLivestreams]= useState(false);
+const [Livestreamsnoposted, setLivestreamsnoposted]= useState(false);
 
 const [sh, setsh]=useState(true)
   const items = [
@@ -73,89 +82,104 @@ const [sh, setsh]=useState(true)
   const [category , setcategory] = useState([
     {
       id:1,
-      CategoryName:'Art & Crafts',
-      active : 0
+      CategoryName:'Made for the Sports Quiz at Sardar Pate...',
+      active : 0,
+      streamdate:'Streamed 2 days ago',
+      img:require('../images/image6.png'),
+
+
 
     },
     {
       id:2,
 
-      CategoryName:'Automotive',
-      active : 0
+      CategoryName:'Laugh Now Cry Later’ featuring Lil Durk, t...',
+      active : 0,
+      streamdate:'Streamed Jan, 30, 2021',
+      img:require('../images/image8.png'),
+
 
 
     },
     {
       id:3,
-      CategoryName:'Art & Crafts',
-      active : 0
+      CategoryName:'Off White founder Virgil Abloh and Ni...',
+      active : 0,
+      streamdate:'Streamed Jan, 30, 2021',
+      img:require('../images/image7.png'),
+
+
 
 
     },
-    {
-      id:4,
-
-      CategoryName:'Automotive',
-      active : 0
-
-
-    },
-    {
-      id:5,
-
-      CategoryName:'Art & Crafts',
-      active : 0
-
-
-    },
-    {
-      id:6,
-
-      CategoryName:'Automotive',
-      active : 0
-
-
-    },
+   
   ])
 
   const renderLivenow = ({ item, index }) => {  
+
+    
+
     return(
-   
-
-    
       <TouchableOpacity 
-      onPress={()=> {navigation.navigate('Login')}}
-      style={{height:deviceHeight*0.33, width:'100%', flexDirection:'column', marginTop:5,}}>
-
-    
-
-      <View style={{height:'60%', flexDirection:'row'}}>
-      <ImageBackground  style={{height:'100%', width:'100%'}} imageStyle={{borderRadius:5,}} source={require('../images/football.png')}>
-     
-      </ImageBackground>
-
-      </View>
-
-      <View style={{paddingVertical:5,marginTop:5, flexDirection:'row'}}>
-      <Text style={{fontWeight:'500', }}>Made for the Sports Quiz at Sardar Patel Vidyalaya "Khelmanch"</Text>
+      onPress={()=> {
+        if(item.active == '1'){
+          let markers = [ ...data];
+          markers[index] = {...markers[index], active: '0'};
+          setdata(markers)
+          // this.setState({ markers });
+          
+            console.log(JSON.stringify(markers))
 
 
-      </View>
 
-      <View style={{paddingVertical:5, justifyContent:'space-between', flexDirection:'row'}}>
-      <Text style={{color:'#616B7B'}}>Streamed 2 hours ago</Text>
-      <Text style={{color:'#616B7B'}}>24K views</Text>
-      
+        //   let temp_state = [...data];
+        //     alert(temp_state)
+        // objIndex = temp_state.findIndex((obj => obj.active == '0'));
+        // // alert(objIndex)
+        // console.log("Before update: ", temp_state[objIndex])
 
-      </View>
-      
+        // //Update object's name property.
+        // temp_state[objIndex].active = "0"
+        
+        // //Log object to console again.
+        // console.log("After update: ", temp_state[objIndex])
+        // setdata(temp_state)
+
+      } else{
+        let markers = [ ...data];
+        markers[index] = {...markers[index], active: '1'};
+        setdata(markers)
+        
+      }
+
+      }}
+      style={{height:deviceHeight*0.11,borderRadius:5,borderWidth:1,borderColor:'#E3E3EB',  backgroundColor:item.active==1?'#EDEDF6':'white', width:'100%', flexDirection:'row', marginTop:10,}}>
+
+        <View style={{width:'30%', padding:8,}}>
+
+        <Image style={{width:'100%', height:'100%'}}  source={require('../images/nikeshoe.png')}/> 
+        </View>
+
+        <View style={{paddingHorizontal:10, width:'67%', justifyContent:'space-evenly'}}>
+          <Text  style={{color:'#162741',  fontWeight:'500'}}>Nike ZoomX Vaporfly NEXT% 2...</Text>
+          <Text style={{color:'#616B7B', fontSize:12, fontWeight:'400'}}>Men’s Road Racing Shoes</Text>
+         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+
+          <Text style={{color:'#162741', fontSize:12, fontWeight:'500'}}>£234.95</Text>
+         {item.active==1?
+          <Ionicons name='checkmark' size={20} color='#162741'/>
+          :
+         null
+          }
+          </View>
+
+        </View>
+
 
 
 
       </TouchableOpacity>
-    
-
-
+  
     );
   
   
@@ -164,15 +188,14 @@ const [sh, setsh]=useState(true)
   
   const renderProducts = ({ item, index }) => {  
     return(
-     <TouchableOpacity style={{borderColor:'#E3E3EB',borderRadius:5, borderWidth:1,marginLeft:20, width:deviceWidth*0.45, padding:5,}}>
+     <TouchableOpacity style={{borderColor:'#E3E3EB',borderRadius:5,marginLeft:0, width:deviceWidth*0.41, margin:5,}}>
 
-        <Image style={{width:'100%',height:deviceHeight*0.17 }} resizeMode='cover' resizeMethod='resize' source={require('../images/nikeshoe.png')}/>
+        <Image style={{width:'100%',height:deviceHeight*0.13, borderRadius:10, }}  resizeMode='cover' resizeMethod='resize'imageStyle={{borderRadius:10,}} source={item.img}/>
 
         <View>
-          <Text style={{marginTop:7,fontSize:12, color:'#162741'}}>Nike ZoomX Vaporfly NEXT% 2...</Text>
-          <Text style={{marginTop:5,color:'#616B7B'}}>Men’s Road Racing Shoes</Text>
+          <Text style={{marginTop:7,fontSize:12,fontWeight:'500', color:'#162741'}}>{item.CategoryName}</Text>
+          <Text style={{marginTop:5,color:'#616B7B'}}>{item.streamdate}</Text>
 
-          <Text style={{color:'#162741',marginTop:5,fontWeight:'500', fontSize:12}}>£234.95</Text>
         </View>
 
      </TouchableOpacity>
@@ -317,142 +340,71 @@ onRequestClose={() => {
 </View>
       </Modal>
 
-        <Appbar style={styles.appbar}>
-  
-        <View 
-            style={{alignContent:"center",flexDirection:'row',justifyContent:'space-between',width:'100%', alignItems:"center"}}   >
+     
+      <Appbar style={styles.appbar}>
 
-           <View>
+<MaterialIcons  onPress={()=> {navigation.goBack()}} name='arrow-back'  size={25} color='#616B7B'/>
 
-             </View>
+<Text style={{fontWeight:'500', fontSize:18}}>Catalogue</Text>
 
-             <View>
+<View>
 
-            </View>
+<Text></Text>
+</View>
+  </Appbar>
 
-      <View style={{flexDirection:'row', }}>
-      
-      {login == true?
-            <TouchableOpacity
-            style={{marginRight:15,}}
-              onPress={()=> {
-               navigation.navigate('Setting')
-              }}
-              >
-               
-              <Image style={{width:25, height:25}} source={require('../images/Combined-Shape.png')}/>              
-              </TouchableOpacity>
-              : null
-              
-            }
-          
-              
-       {  role == 1 ?   
-       
-        <Menu
-          visible={plus}
-          onDismiss={closeMenu}
-          style={{marginTop:30 ,}}
-          anchor={    <TouchableOpacity
-            // style={{marginRight:15,}}
-
-onPress={()=> {
-openMenu()              }}
->
-
-<AntDesign   name='pluscircleo' size={25} color={'#616B7B'} />
-
-</TouchableOpacity>}
-          
-          >
-          <Menu.Item  style={{backgroundColor:'red' , }} onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" />
-          <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
-          <Divider />
-          <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
-        </Menu>
-        :
-
-        role == 0 ?     
-        <Menu
-          visible={plus}
-          onDismiss={closeMenu}
-          style={{marginTop:30,}}
-          anchor={    <TouchableOpacity
-            // style={{marginRight:15,}}
-
-onPress={()=> {
-openMenu()              }}
->
-
-<AntDesign   name='pluscircleo' size={25} color={'#616B7B'} />
-
-</TouchableOpacity>}
-          
-          >
-          <Menu.Item  style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" />
-          <Divider />
-          <Menu.Item style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
-          <Divider />
-          <Menu.Item style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
-        </Menu>
-
-        :
-        null
-
-        }
-                </View>
-              
-            </View>
-  
-  
-        <View style={{alignSelf:'center', }}>
-            
-  
-        </View>
-  
-        </Appbar>
-
-
-        <View style={styles.body}>
+        <ScrollView style={styles.body}>
        
        
-        <View style={{flexDirection:'row',marginTop:20,justifyContent:'space-between', paddingHorizontal:30,}}>
-       
-        <View style={{flexDirection:'row'}}> 
 
-         <Image style={{width:70, height:70}} source={require('../images/profilepic.png')}/>
-          <View style={{justifyContent:'center'}} >
-          <Text style={{color:'#162741',alignSelf:'center', fontWeight:'500', fontSize:18, marginLeft:10,}}>Lisa Johnson</Text>
-          <Text style={{color:'#162741', fontWeight:'400',marginTop:5, fontSize:16, marginLeft:10,}}>lis_j99</Text>
-          </View>
-          </View>
-          <TouchableOpacity 
-           onPress={()=> {navigation.navigate('EditProfile')}}
+       <View style={{flexDirection:'row', paddingHorizontal:20,marginTop:10,justifyContent:'space-between'}}>
+       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Products</Text>
 
-        style={{alignSelf:'center'}}>
-          <Text style={{fontWeight:'600',fontSize:18, color:'#1C54DB'}}>Edit</Text>
+       <Text style={{alignSelf:'center',color:'#1C54DB', textAlign:'left', fontSize:18, fontWeight:'500', marginLeft:0,}}>+ Add</Text>
 
-        </TouchableOpacity>
          </View>
 
             
 
-               <Text style={{color:'#565C66',paddingHorizontal:30,marginTop:20,  fontWeight:'400'}}>Whoever said money can't buy happiness simply didn't know where to go shopping.</Text>
-
-               <Text style={{color:'#162741', fontWeight:'500',paddingHorizontal:20, fontSize:18,marginTop:30, marginLeft:10,}}>Watch history</Text>
-
-               <FlatList
-              contentInsetAdjustmentBehavior="automatic"
-              data={category}
-              contentContainerStyle={{alignSelf:'center', paddingBottom:80, paddingHorizontal:25,  }}
-              renderItem={renderLivenow}
-              keyExtractor={(item,id) => id.toString()}
-              /> 
-
-      
 
 
-          </View>
+        <View style={{padding:5,marginTop:30, paddingHorizontal:20}}>
+          <Text style={{fontWeight:'500',fontSize:16, color:'#162741'}}>Shoes</Text>
+
+ <View style={{width:'100%', paddingVertical:12, paddingHorizontal:20,}}>
+<FlatList
+         contentInsetAdjustmentBehavior="automatic"
+         data={data}
+         contentContainerStyle={{width:'100%', marginTop:0, alignSelf:'center', paddingHorizontal:2,  }}
+         renderItem={renderLivenow}
+         keyExtractor={(item,id) => id.toString()}
+         extraData={this.state}
+         />  
+         
+   </View>
+  </View>
+
+  <View style={{padding:5,marginTop:10, paddingHorizontal:20}}>
+          <Text style={{fontWeight:'500',fontSize:16, color:'#162741'}}>Clothing</Text>
+
+ <View style={{width:'100%', paddingVertical:12, paddingHorizontal:20,}}>
+<FlatList
+         contentInsetAdjustmentBehavior="automatic"
+         data={data}
+         contentContainerStyle={{width:'100%', marginTop:0, alignSelf:'center', paddingHorizontal:2,  }}
+         renderItem={renderLivenow}
+         keyExtractor={(item,id) => id.toString()}
+         extraData={this.state}
+         />  
+         
+   </View>
+  </View>
+
+ 
+ 
+</ScrollView>
+
+         
   
   
         </SafeAreaView>
@@ -460,7 +412,7 @@ openMenu()              }}
     );
 }
 
-export default BuyerProfile;
+export default ProfileCatalogue;
 
 
 const styles = StyleSheet.create({
@@ -506,7 +458,7 @@ const styles = StyleSheet.create({
   paddingHorizontal:0,
   height:'91%',
   flex:1,
-  paddingVertical:10,
+  paddingVertical:0,
   paddingHorizontal:0,
  
  },

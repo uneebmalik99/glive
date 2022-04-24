@@ -255,7 +255,11 @@ const [sh, setsh]=useState(true)
      }
      else if (AppConstance.ROLE == 0 ){
        setrole(0)
-     }else{
+     }else if(AppConstance.ROLE == 2){
+      setrole(2)
+
+     }
+     else{
        setrole(3)
      }
 
@@ -396,6 +400,31 @@ openMenu()              }}
           <Divider />
           <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
         </Menu>
+        :
+         role == 2 ?   
+       
+         <Menu
+           visible={plus}
+           onDismiss={closeMenu}
+           style={{marginTop:30 ,}}
+           anchor={    <TouchableOpacity
+             // style={{marginRight:15,}}
+ 
+ onPress={()=> {
+ openMenu()              }}
+ >
+ 
+ <AntDesign   name='pluscircleo' size={25} color={'#616B7B'} />
+ 
+ </TouchableOpacity>}
+           
+           >
+           <Menu.Item   onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" >
+             </Menu.Item>
+           <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
+           <Divider />
+           <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
+         </Menu>
         :
 
         role == 0 ?     

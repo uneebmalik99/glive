@@ -128,7 +128,9 @@ const renderLivenow = ({ item, index }) => {
 
             <Text style={{fontSize:16,fontWeight:'500',marginTop:20, color:'#162741'}}>Profile</Text>
 
+          {AppConstance.ROLE == 1 ?
 
+          <View>
             <Text style={{fontSize:16,fontWeight:'500',marginTop:20, color:'#162741'}}>Business Name</Text>
 
             <TextInput
@@ -137,6 +139,34 @@ const renderLivenow = ({ item, index }) => {
       style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, }}
      
       />
+      </View>
+      :
+      AppConstance.ROLE == 0?
+
+        <View>
+            <Text style={{fontSize:16,fontWeight:'500',marginTop:20, color:'#162741'}}>Profile Name</Text>
+
+            <TextInput
+      placeholder='ex. Profile Name'
+      mode='outlined'
+      style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, }}
+     
+      />
+      </View>
+      : 
+
+     <View>
+            <Text style={{fontSize:16,fontWeight:'500',marginTop:20, color:'#162741'}}>Business Name</Text>
+
+            <TextInput
+      placeholder='ex. Business Name'
+      mode='outlined'
+      style={{height:50,paddingHorizontal:10,marginTop:20, borderWidth:1,borderColor:'#E3E3EB', borderRadius:5, }}
+     
+      />
+      </View>
+
+      }
     <View style={{height:2, width:'100%',marginTop:20, backgroundColor:'#E3E3EB'}}>
         </View>
 

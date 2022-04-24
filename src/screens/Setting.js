@@ -81,7 +81,13 @@ const Setting = ({route ,navigation }) => {
       icon:require('../images/gLive_Icons/Settings/account_settings_icon.svg'),
       page:'AccountSettings'
     },
-    
+    {
+      name:'Business Settings',
+      icon:require('../images/gLive_Icons/Settings/businesssettingsicon.svg'),
+      // page:'BecomeaBusiness',
+      page:'BecomeaBusinessnostore'
+
+    },
     {
       name:'Language',
       icon:require('../images/gLive_Icons/Settings/language_icon.svg'),
@@ -167,7 +173,7 @@ const renderLivenow = ({ item, index }) => {
 
   <FlatList
          contentInsetAdjustmentBehavior="automatic"
-         data={AppConstance.ROLE == 1 ? data2 : data }
+         data={AppConstance.ROLE == 1 ? data2 :AppConstance.ROLE == 2 ? data2 : data }
   
          contentContainerStyle={{height:'100%' ,width:'100%', marginTop:0, alignSelf:'center', paddingHorizontal:2,  }}
          renderItem={renderLivenow}

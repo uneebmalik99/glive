@@ -294,7 +294,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 44G5Z9TQ9H;
+						DevelopmentTeam = 62Q26QSEJW;
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Automatic;
 					};
@@ -734,7 +734,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 44G5Z9TQ9H;
+				DEVELOPMENT_TEAM = 62Q26QSEJW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = gLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -744,7 +744,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.glive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gliveapp;
 				PRODUCT_NAME = gLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -762,7 +762,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 44G5Z9TQ9H;
+				DEVELOPMENT_TEAM = 62Q26QSEJW;
 				INFOPLIST_FILE = gLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 0.1.0;
@@ -771,7 +771,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.glive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gliveapp;
 				PRODUCT_NAME = gLive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

@@ -12,7 +12,8 @@ import {
     TextInput,
     Image,
   Modal,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -50,7 +51,7 @@ const  images1= [
   "https://source.unsplash.com/1024x768/?tree",
 ]
 
-const ProfileSecond = ({route, navigation }) => {
+const Livestreams = ({route, navigation }) => {
 
   const [Productsvisible,setProductsvisible] = useState(false)
   const [login , setlogin] =useState(true)
@@ -217,7 +218,7 @@ const [sh, setsh]=useState(true)
     return(
      <TouchableOpacity style={{borderColor:'#E3E3EB',borderRadius:5,marginLeft:0, width:deviceWidth*0.41, margin:5,}}>
 
-        <Image style={{width:'100%',height:deviceHeight*0.13, borderRadius:10, }}  resizeMode='cover' resizeMethod='resize'imageStyle={{borderRadius:10,}} source={item.img}/>
+        <Image style={{width:'100%',height:Platform.OS== 'ios'?deviceHeight*0.13:deviceHeight*0.15, borderRadius:10, }}  resizeMode='cover' resizeMethod='resize'imageStyle={{borderRadius:10,}} source={item.img}/>
 
         <View>
           <Text style={{marginTop:7,fontSize:12,fontWeight:'500', color:'#162741'}}>{item.CategoryName}</Text>
@@ -428,7 +429,7 @@ onRequestClose={() => {
 
    </View>
    {PreviousLivestreams ==true?
-     <View style={{height:deviceHeight*0.28, }}>
+     <View style={{height:Platform.OS == 'ios'? deviceHeight*0.28:deviceHeight*0.30, }}>
      <FlatList
      contentInsetAdjustmentBehavior="automatic"
      data={category}
@@ -570,7 +571,7 @@ onRequestClose={() => {
     );
 }
 
-export default ProfileSecond;
+export default Livestreams;
 
 
 const styles = StyleSheet.create({
