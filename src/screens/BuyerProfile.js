@@ -35,7 +35,6 @@ import { SliderBox } from "react-native-image-slider-box";
 import Appcolors from '../AppColors/Appcolors.js';
 import App from '../../App.js';
 import Icon from 'react-native-vector-icons'
-import SvgUri from 'react-native-svg-uri'; // SVG Package
 
 import RNPopover from 'react-native-popover-menu';
 
@@ -124,7 +123,7 @@ const [sh, setsh]=useState(true)
 
     
       <TouchableOpacity 
-      onPress={()=> {navigation.navigate('Login')}}
+      // onPress={()=> {navigation.navigate('Login')}}
       style={{height:deviceHeight*0.33, width:'100%', flexDirection:'column', marginTop:5,}}>
 
     
@@ -347,8 +346,33 @@ onRequestClose={() => {
             }
           
               
-       {  role == 1 ?   
+          {  role == 1 ?   
        
+       <Menu
+         visible={plus}
+         onDismiss={closeMenu}
+         style={{marginTop:30 ,}}
+         anchor={    <TouchableOpacity
+           // style={{marginRight:15,}}
+
+onPress={()=> {
+openMenu()              }}
+>
+
+<AntDesign   name='pluscircleo' size={25} color={'#616B7B'} />
+
+</TouchableOpacity>}
+         
+         >
+         <Menu.Item   onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" >
+           </Menu.Item>
+         <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
+         <Divider />
+         <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
+       </Menu>
+       :
+        role == 2 ?   
+      
         <Menu
           visible={plus}
           onDismiss={closeMenu}
@@ -365,20 +389,21 @@ openMenu()              }}
 </TouchableOpacity>}
           
           >
-          <Menu.Item  style={{backgroundColor:'red' , }} onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" />
+          <Menu.Item   onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" >
+            </Menu.Item>
           <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
           <Divider />
           <Menu.Item onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
         </Menu>
-        :
+       :
 
-        role == 0 ?     
-        <Menu
-          visible={plus}
-          onDismiss={closeMenu}
-          style={{marginTop:30,}}
-          anchor={    <TouchableOpacity
-            // style={{marginRight:15,}}
+       role == 0 ?     
+       <Menu
+         visible={plus}
+         onDismiss={closeMenu}
+         style={{marginTop:30,}}
+         anchor={    <TouchableOpacity
+           // style={{marginRight:15,}}
 
 onPress={()=> {
 openMenu()              }}
@@ -387,19 +412,16 @@ openMenu()              }}
 <AntDesign   name='pluscircleo' size={25} color={'#616B7B'} />
 
 </TouchableOpacity>}
-          
-          >
-          <Menu.Item  style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('schedulealivestream')}} title="Schedule a livestream" />
-          <Divider />
-          <Menu.Item style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('Golive') }} title="Go Live" />
-          <Divider />
-          <Menu.Item style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('Uploadavideo')}} title="Upload a video" />
-        </Menu>
+         
+         >
+         <Menu.Item  style={{margin:6,borderRadius:5, }} onPress={() => {setPlus(false); navigation.navigate('Createastore')}} title="Create a store" />
+         <Divider />
+       </Menu>
 
-        :
-        null
+       :
+       null
 
-        }
+       }
                 </View>
               
             </View>

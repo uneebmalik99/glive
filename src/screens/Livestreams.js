@@ -164,10 +164,19 @@ const [sh, setsh]=useState(true)
       <View style={{paddingHorizontal:20,marginTop:15, flexDirection:'row', justifyContent:'space-between'}}>
           
           <View style={{flexDirection:'row', marginBottom:5}}>
+         {Platform.OS == 'ios'?
            <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Discovery/products_white_icon.svg')}
                         />
+                             :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Discovery/products_white_icon.png')}
+
+          />
+        }
                                       <Text style={{marginLeft:10,alignSelf:'center', fontSize:16, fontWeight:'500'}}>Products</Text>
             </View>
 
@@ -395,10 +404,19 @@ onRequestClose={() => {
 
     <View style={{ width:'60%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Profile/previous_livestream_icon.svg')}
     />
+         :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Profile/previous_livestream_icon.png')}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Previous Livestreams</Text>
@@ -453,10 +471,20 @@ onRequestClose={() => {
 
     <View style={{ width:'60%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+  {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Profile/scheduled_livestream_icon.svg')}
     />
+     :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Profile/scheduled_livestream_icon.png')}
+
+          />
+        }
+
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Scheduled Livestreams</Text>
@@ -515,10 +543,19 @@ onRequestClose={() => {
 
     <View style={{ width:'60%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Profile/livestreams_not_posted_icon.svg')}
     />
+     :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Profile/livestreams_not_posted_icon.png')}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Livestreams (not posted)</Text>
@@ -530,7 +567,8 @@ onRequestClose={() => {
      onPress={()=> {if(Livestreamsnoposted == true){setLivestreamsnoposted(false)} else{setLivestreamsnoposted(true)}}}
     style={{justifyContent:'center'}}>
       {Livestreamsnoposted == false ?
- <SvgUri
+
+<SvgUri
 //  onPress={()=> {setPreviousLivestreams(true)}}
  style={{alignSelf:'center'}}
  source={require('../images/gLive_Icons/Profile/hamburger_icon.svg')}

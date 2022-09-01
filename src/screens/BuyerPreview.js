@@ -27,7 +27,6 @@ import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
-import SvgUri from 'react-native-svg-uri'; // SVG Package
 import * as ImagePicker from "react-native-image-picker"
 
 import Dateicon from '../images/gLive_Icons/Schedule/date_icon.svg'

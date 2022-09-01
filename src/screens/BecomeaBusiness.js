@@ -13,7 +13,8 @@ import {
     TextInput,
     Image,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -93,10 +94,19 @@ const renderLivenow = ({ item, index }) => {
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={item.icon}
     />
+     :
+       <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={item.icon}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>{item.name}</Text>
@@ -282,12 +292,20 @@ onRequestClose={() => {
 <TouchableOpacity style={{padding:20,marginTop:20, flexDirection:'row',width:'50%',borderWidth:1,borderRadius:5,borderColor:'#E3E3EB', justifyContent:'space-between'}}>
           
 
-        
+        {Platform.OS == 'ios'?
           <SvgUri
         style={{alignSelf:'center'}}
         source={require('../images/gLive_Icons/Settings/delete_user_icon.svg')}
             />
-  
+              :
+       <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Settings/delete_user_icon.png')}
+
+          />
+        }
+
             <Text StatusBar={{fontSize:16, fontWeight:'500'}}>Delete Account</Text>
           </TouchableOpacity>
 
@@ -327,32 +345,28 @@ onRequestClose={() => {
 </View>
   </Appbar>
 
-
-  {/* <FlatList
-         contentInsetAdjustmentBehavior="automatic"
-         data={data}
-  
-         contentContainerStyle={{height:'100%' ,width:'100%', marginTop:0, alignSelf:'center', paddingHorizontal:2,  }}
-         renderItem={renderLivenow}
-         keyExtractor={(item,id) => id.toString()}
-         />  */}
-
-
-
-
          <ScrollView>
 
 
          <TouchableOpacity 
-   onPress={()=> {navigation.navigate(item.page)}}
+  //  onPress={()=> {navigation.navigate(item.page)}}
    style={{borderColor:'#E3E3EB',flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1,height:60,paddingHorizontal:15, width:'100%'}}>
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Settings/account_settings_icon.svg')}
     />
+       :
+       <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Settings/account_settings_icon.png')}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Business Information</Text>
@@ -361,7 +375,7 @@ onRequestClose={() => {
 
 
     <View style={{justifyContent:'center'}}>
-      <MaterialIcons name='navigate-next' color='#616B7B' style={{alignSelf:'center'}} size={25}/>
+    <Ionicons onPress={()=> {setmember(true)}} name='chevron-up' size={20} color='#616B7B'/>
     </View>
    
 
@@ -369,15 +383,24 @@ onRequestClose={() => {
 
 
    <TouchableOpacity 
-   onPress={()=> {navigation.navigate(item.page)}}
+  //  onPress={()=> {navigation.navigate(item.page)}}
    style={{borderColor:'#E3E3EB',flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1,height:60,paddingHorizontal:15, width:'100%'}}>
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Settings/store_profile_icon.svg')}
     />
+       :
+       <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Settings/store_profile_icon.png')}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Store Profile</Text>
@@ -386,8 +409,9 @@ onRequestClose={() => {
 
 
     <View style={{justifyContent:'center'}}>
-      <MaterialIcons name='navigate-next' color='#616B7B' style={{alignSelf:'center'}} size={25}/>
+    <Ionicons onPress={()=> {setmember(true)}} name='chevron-up' size={20} color='#616B7B'/>
     </View>
+
    
 
    </TouchableOpacity>
@@ -399,10 +423,19 @@ onRequestClose={() => {
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+   {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Settings/members_icon.svg')}
     />
+     :
+       <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Settings/members_icon.png')}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Members</Text>
@@ -431,7 +464,7 @@ onRequestClose={() => {
 
 
    {member == true ?
-  <View style={{paddingHorizontal:25,marginTop:5,}}>
+  <ScrollView style={{paddingHorizontal:25,marginTop:5,}}>
     <Text style={{fontWeight:'500', fontSize:16, color:'#7D8696'}}>OWNER</Text>
     <TextInput
       placeholder='John Smith'
@@ -465,7 +498,11 @@ onRequestClose={() => {
         <Text style={{fontSize:16, fontWeight:'500',alignSelf:'flex-end', color:'#1C54DB'}}>+  Add</Text>
       
       </TouchableOpacity>
-    </View>
+
+      <View style={{height:100}}>
+
+      </View>
+    </ScrollView>
 
     
 
@@ -489,12 +526,12 @@ onRequestClose={() => {
                       shadowColor: "#D5D5EC",
 shadowOffset: {
 	width: 0,
-	height: 2,
+	height: 1,
 },
 shadowOpacity: 0.25,
 shadowRadius: 3.84,
 
-elevation: 5,
+elevation: 1,
                       alignSelf:'center', width:deviceWidth, backgroundColor:'#E3E3EB'}}>
         </View>
 
@@ -505,6 +542,11 @@ elevation: 5,
         </TouchableOpacity>
 
         </View>
+
+        <View style={{height:15}}>
+
+        </View>
+
 
           
         </SafeAreaView>

@@ -55,19 +55,22 @@ const Login = ({ navigation }) => {
         AppConstance.LOGIN  = 1;
 // 1 for seller  
 navigation.navigate('Discover')
-      }else if(email == 'Orhan@hotmail.com'){
+      }
+      else if(email == 'Orhan@hotmail.com'){
         AppConstance.ROLE = 0;
         AppConstance.LOGIN  = 1;
 // 0 for buyer 
         navigation.navigate('buyer')
-      }else if(email == 'test2@hotmail.com'){
-        AppConstance.ROLE = 2;
-        AppConstance.LOGIN  = 1;
-        navigation.navigate('ProfileStore2')
-
-// 2 for seller with store 
-
       }
+//       else if(email == 'test2@hotmail.com'){
+//         AppConstance.ROLE = 2;
+//         AppConstance.LOGIN  = 1;
+//         // navigation.navigate('ProfileStore2')
+//         navigation.navigate('Discover')
+
+// // 2 for seller with store 
+
+//       }
       
       else{
         AppConstance.LOGIN  = 1;

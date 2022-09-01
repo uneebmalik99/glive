@@ -12,7 +12,8 @@ import {
     TextInput,
     Image,
   Modal,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -172,10 +173,19 @@ const [sh, setsh]=useState(true)
       <View style={{paddingHorizontal:20,marginTop:15, flexDirection:'row', justifyContent:'space-between'}}>
           
           <View style={{flexDirection:'row', marginBottom:5}}>
+           {Platform.OS == 'ios'?
            <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Discovery/products_white_icon.svg')}
                         />
+                        :
+                        <Image
+                                                        style={{alignSelf:'center',}}
+                    
+                                                        source={require('../images/gLive_Icons/Discovery/products_white_icon.png')}
+                    
+                              />
+                            }
                                       <Text style={{marginLeft:10,alignSelf:'center', fontSize:16, fontWeight:'500'}}>Products</Text>
             </View>
 
@@ -422,10 +432,19 @@ shadowRadius: 3.84,
 backgroundColor:'white',
 alignSelf:'flex-end',elevation:5, width:50,height:50, justifyContent:'center', borderRadius:400/2,color:'white', padding:5}}>
 {/* <Image  style={{width:30,height:30, alignSelf:'center',}} source={require('../images/camera_img.png')}/> */}
+{Platform.OS == 'ios'?
 <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Profile/change_profile_pic_icon.svg')}
                         />
+                        :
+                        <Image
+                                                        style={{alignSelf:'center',}}
+                    
+                                                        source={require('../images/gLive_Icons/Profile/change_profile_pic_icon.png')}
+                    
+                              />
+                            }
 </View>
 
 </ImageBackground>
@@ -493,17 +512,17 @@ alignSelf:'flex-end',elevation:5, width:50,height:50, justifyContent:'center', b
           </View>
   
   
-          <View style={{height:2,
+          <View style={{height:1,
                       
                       shadowColor: "#D5D5EC",
 shadowOffset: {
 	width: 0,
-	height: 2,
+	height: 0.5,
 },
 shadowOpacity: 0.25,
 shadowRadius: 3.84,
 
-elevation: 5,
+elevation: 2,
                       alignSelf:'center', width:deviceWidth, backgroundColor:'#E3E3EB'}}>
         </View>
 

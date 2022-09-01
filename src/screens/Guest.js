@@ -173,10 +173,20 @@ const [sh, setsh]=useState(true)
       <View style={{paddingHorizontal:20,marginTop:Platform.OS=='ios' ?15:30,flexDirection:'row', justifyContent:'space-between'}}>
           
           <View style={{flexDirection:'row',}}>
+        {Platform.OS == 'ios'?
            <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Discovery/products_white_icon.svg')}
                         />
+
+:
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Discovery/products_white_icon.png')}
+
+          />
+        }
                                       <Text style={{marginLeft:10,alignSelf:'center', fontSize:16, fontWeight:'500'}}>Products</Text>
             </View>
 
@@ -444,10 +454,19 @@ openMenu()              }}
 
               <View style={{flexDirection:'row',marginTop:15, justifyContent:'space-between'}}>
               <Text style={{fontWeight:'600',alignSelf:'center',fontSize:18}}>Live Now</Text>
+            {Platform.OS == 'ios'?
               <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Discovery/categories_icon.svg')}
                         />
+                               :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Discovery/categories_icon.png')}
+
+          />
+        }
             </View>
 
               <FlatList

@@ -15,7 +15,8 @@ import {
     Keyboard,
     Modal,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -1033,10 +1034,19 @@ options={['option 1', 'option 2']}>
                     <TouchableOpacity onPress={()=> {chooseFile()}} style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'45%'}}>
 
                       <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
+                     {Platform.OS == 'ios'?
                       <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Schedule/browse_photo_icon.svg')}
                         />
+                        :
+                        <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/browse_photo_icon.png')}
+
+          />
+        }
 
                     <Text style={{alignSelf:'center',fontWeight:'400'}}>Browse photo</Text>
                       </View>
@@ -1049,10 +1059,19 @@ options={['option 1', 'option 2']}>
                     style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'45%'}}>
                     
                     <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
+                   {Platform.OS == 'ios'?
                     <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Schedule/take_photo_icon.svg')}
                         />
+                        :
+                           <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/take_photo_icon.png')}
+
+          />
+        }
                     <Text style={{alignSelf:'center',fontWeight:'400'}}>Take photo</Text>
                       </View>
 
@@ -1068,10 +1087,19 @@ options={['option 1', 'option 2']}>
                     <ImageBackground imageStyle={{borderRadius:5}} source={{uri:img}} style={{borderColor:'#E3E3EB', height:deviceHeight*0.2,width:"100%", flexDirection:'row', justifyContent:'flex-end', marginTop:20, }}>
 
                       <TouchableOpacity onPress={()=>{setimg(null)}} style={{alignSelf:'flex-start',margin:10,}}>
+                  {Platform.OS == 'ios'?
                   <SvgUri
                           style={{alignSelf:'flex-start',}}
                           source={require('../images/gLive_Icons/Schedule/remove_image_icon.svg')}
                         />
+                        :
+                        <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/remove_image_icon.png')}
+
+          />
+        }
 
                         </TouchableOpacity>
                       </ImageBackground>
@@ -1091,10 +1119,19 @@ options={['option 1', 'option 2']}>
 
 
   {/* <Im age  href={require('../images/gLive_Icons/Schedule/date_icon.svg')} style={{alignSelf:'center'}} size={22} color='black' /> */}
+ {Platform.OS == 'ios'?
   <SvgUri
         style={{alignSelf:'center'}}
         source={require('../images/gLive_Icons/Schedule/date_icon.svg')}
       />
+      :
+         <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/date_icon.png')}
+
+          />
+        }
       <Text style={{alignSelf:'center', fontSize:16, fontWeight:'400', color:'#7D8696'}}>{date}</Text>
 
 
@@ -1106,10 +1143,19 @@ options={['option 1', 'option 2']}>
 
 
 {/* <Im age  href={require('../images/gLive_Icons/Schedule/date_icon.svg')} style={{alignSelf:'center'}} size={22} color='black' /> */}
+{Platform.OS == 'ios'?
 <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Schedule/time_icon.svg')}
     />
+    :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/time_icon.png')}
+
+          />
+        }
     <Text style={{alignSelf:'center', fontSize:16, fontWeight:'400', color:'#7D8696'}}>{hours}:{minutes}</Text>
 
 

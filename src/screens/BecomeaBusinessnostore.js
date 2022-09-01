@@ -13,7 +13,8 @@ import {
     TextInput,
     Image,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -78,10 +79,19 @@ const renderLivenow = ({ item, index }) => {
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={item.icon}
     />
+     :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={item.icon}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>{item.name}</Text>
@@ -128,11 +138,19 @@ const renderLivenow = ({ item, index }) => {
    
           <View style={{backgroundColor:'#EDEDF6',paddingVertical:20, marginTop:20, borderRadius:5,}}>
 
-         
+         {Platform.OS == 'ios'?
           <SvgUri
       style={{alignSelf:'center', marginTop:15,}}
       source={require('../images/gLive_Icons/Settings/delete_account_icon.svg')}
     />
+     :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Settings/delete_account_icon.png')}
+
+          />
+        }
 
     <Text style={{fontSize:16,fontWeight:'500', color:'#16274199',alignSelf:'center', marginTop:15,}}>You don’t have a store created</Text>
     <Text style={{fontSize:18,fontWeight:'500', textAlign:'center', color:'#162741',paddingHorizontal:90,alignSelf:'center', marginTop:15,}}>Start streaming and selling now!</Text>

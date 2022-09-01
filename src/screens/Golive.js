@@ -15,7 +15,8 @@ import {
     Keyboard,
     Modal,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -173,10 +174,19 @@ const Golive = ({route, navigation }) => {
           <TouchableOpacity
           onPress={()=> {seteditmodal(true); }}
           style={{alignSelf:'center',width:'60%',height:'50%',justifyContent:'center', }}>
+          {Platform.OS == 'ios'?
           <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/GoLive&Stream/edit_stream_icon.svg')}
                         />
+                        :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/GoLive&Stream/edit_stream_icon.png')}
+
+          />
+        }
             </TouchableOpacity>
         
           </View>
@@ -236,20 +246,38 @@ onPress={()=> {seteditmodal(false)}}
       <TouchableOpacity 
       onPress={()=> {seteditmodal(false); navigation.navigate('LiveStream')}}
       style={{width:'100%',paddingVertical:15, flexDirection:'row',paddingHorizontal:15, borderBottomWidth:1,borderColor:'#D0D0DE99', alignSelf:'center'}}>
+    {Platform.OS == 'ios'?
       <SvgUri
                           style={{alignSelf:'center',marginLeft:10,}}
                           source={require('../images/gLive_Icons/Login/go_live_icon.svg')}
                         />
+                        :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Login/go_live_icon.png')}
+
+          />
+        }
         <Text style={{fontSize:15,color:'#162741',marginLeft:20, fontWeight:'400'}}>Go Live</Text>
         </TouchableOpacity>
 
         <TouchableOpacity 
         onPress={()=> {seteditmodal(false); navigation.navigate('Editschedulealivestream')}}
         style={{width:'90%', flexDirection:'row', alignSelf:'center'}}>
-      <SvgUri
+      {Platform.OS == 'ios'?
+       <SvgUri
                           style={{alignSelf:'center',marginLeft:10,}}
                           source={require('../images/gLive_Icons/GoLive&Stream/edit_icon.svg')}
                         />
+                        :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/GoLive&Stream/edit_icon.png')}
+
+          />
+        }
         <Text style={{fontSize:15,color:'#162741',paddingVertical:15,marginLeft:20, fontWeight:'400'}}>Edit</Text>
         </TouchableOpacity>
 
@@ -288,16 +316,24 @@ onPress={()=> {seteditmodal(false)}}
 
 
         <TouchableOpacity 
-        onPress={()=> {navigation.navigate('schedulealivestreamgolive')}}
+        onPress={()=> {navigation.navigate('schedulealivestreamgolive1')}}
         style={{borderRadius:5,height:50,marginTop:15, flexDirection:'row', justifyContent:'center', backgroundColor:'#E91327'}}>
 
 
         <View style={{width:'30%',alignSelf:'center', height:'100%',flexDirection:'row', justifyContent:'space-between',}}>
-
+{Platform.OS == 'ios'?
         <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Login/go_live_icon.svg')}
                         />
+                        :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Login/go_live_icon.png')}
+
+          />
+        }
           <Text style={{fontSize:18,color:'white', alignSelf:'center', fontWeight:'500'}}>Go Live</Text>
 
         </View>
@@ -312,7 +348,7 @@ onPress={()=> {seteditmodal(false)}}
         <FlatList
               contentInsetAdjustmentBehavior="automatic"
               data={category}
-              contentContainerStyle={{height:'80%',marginTop:20, alignSelf:'center',width:'100%', paddingHorizontal:2,  }}
+              contentContainerStyle={{marginTop:20, alignSelf:'center',width:'100%', paddingHorizontal:2,  }}
               renderItem={renderProductslist}
               keyExtractor={(item,id) => id.toString()}
               /> 

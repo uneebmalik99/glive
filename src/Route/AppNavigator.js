@@ -54,6 +54,9 @@ import Language from '../screens/Language';
 import BecomeaBusinessnostore from '../screens/BecomeaBusinessnostore';
 import Createastore from '../screens/Createastore';
 import schedulealivestreamgolive from '../screens/schedulealivestreamgolive';
+import schedulealivestreamgolive1 from '../screens/schedulealivestreamgolive1';
+
+
 import LiveStream from '../screens/LiveStream';
 import AddProduct from '../screens/AddProduct';
 import Profile from '../screens/Profile';
@@ -66,6 +69,7 @@ import EditProfileStore from '../screens/EditProfileStore';
 import ProfileCatalogue from '../screens/ProfileCatalogue';
 import AddProducts from '../screens/AddProducts';
 import Editschedulealivestream from '../screens/Editschedulealivestream';
+import ProfileAddProduct from '../screens/ProfileAddProduct';
 
 
 const Stack = createStackNavigator();
@@ -192,7 +196,6 @@ tabBarIcon: ({ focused, color, size }) => (
   );
 }
 
-
  const TabScreen =()=>{
   return(
   <Tab.Navigator 
@@ -289,7 +292,7 @@ tabBarIcon: ({ focused, color, size }) => (
 }}  /> */}
 
 
-<Tab.Screen name='Profile' component={Profile}
+<Tab.Screen name='ProfileStore' component={ProfileStore}
   
   options={{
     
@@ -312,7 +315,6 @@ tabBarIcon: ({ focused, color, size }) => (
  </Tab.Navigator>
   );
 }
-
 
 const TabScreen2 =()=>{
   return(
@@ -512,8 +514,6 @@ tabBarIcon: ({ focused, color, size }) => (
   );
 }
 
-
-
 const SettingStack =() =>{
   return(
   <Stack.Navigator>
@@ -529,7 +529,6 @@ options={{
   </Stack.Navigator>
   );
 }
-
 
 const AppNavigator = (props) => {
  return (
@@ -555,12 +554,15 @@ const AppNavigator = (props) => {
 
           <Stack.Screen name='Golive' component={Golive} />
           <Stack.Screen name='schedulealivestreamgolive' component={schedulealivestreamgolive} />
+
+          <Stack.Screen name='schedulealivestreamgolive1' component={schedulealivestreamgolive1} />
           <Stack.Screen name='LiveStream' component={LiveStream} />
 
           <Stack.Screen name='Setting' component={Setting} />
           <Stack.Screen name='EditProfile' component={EditProfile} />
           <Stack.Screen name='EditProfileStore' component={EditProfileStore} />
           <Stack.Screen name='ProfileCatalogue' component={ProfileCatalogue} />
+          <Stack.Screen name='ProfileAddProduct' component={ProfileAddProduct} />
 
 
           <Stack.Screen name='Livestreams' component={Livestreams} />

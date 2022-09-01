@@ -948,10 +948,19 @@ options={['option 1', 'option 2']}>
                     <TouchableOpacity onPress={()=> {chooseFile()}} style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'45%'}}>
 
                       <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
+                     {Platform.OS == 'ios'?
                       <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Schedule/browse_photo_icon.svg')}
                         />
+                           :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/browse_photo_icon.png')}
+
+          />
+        }
 
                     <Text style={{alignSelf:'center',fontWeight:'400'}}>Browse photo</Text>
                       </View>
@@ -964,10 +973,19 @@ options={['option 1', 'option 2']}>
                     style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:'white', width:'45%'}}>
                     
                     <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
+                   {Platform.OS == 'ios'?
                     <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Schedule/take_photo_icon.svg')}
                         />
+                           :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/take_photo_icon.png')}
+
+          />
+        }
                     <Text style={{alignSelf:'center',fontWeight:'400'}}>Take photo</Text>
                       </View>
 
@@ -983,10 +1001,19 @@ options={['option 1', 'option 2']}>
                     <ImageBackground imageStyle={{borderRadius:5}} source={{uri:img}} style={{borderColor:'#E3E3EB', height:Platform.OS == 'ios'? deviceHeight*0.2:deviceHeight*0.25,width:"100%", flexDirection:'row', justifyContent:'flex-end', marginTop:20, }}>
 
                       <TouchableOpacity onPress={()=>{setimg(null)}} style={{alignSelf:'flex-start',margin:10,}}>
+                 {Platform.OS == 'ios'?
                   <SvgUri
                           style={{alignSelf:'flex-start',}}
                           source={require('../images/gLive_Icons/Schedule/remove_image_icon.svg')}
                         />
+                           :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Schedule/remove_image_icon.png')}
+
+          />
+        }
 
                         </TouchableOpacity>
                       </ImageBackground>
@@ -1028,10 +1055,19 @@ options={['option 1', 'option 2']}>
         onPress={()=> {setlinkedProduct(true)}}
         style={{height:40,alignSelf:'center', justifyContent:'center', width:40,borderRadius:400/2,  }}>
           {/* <AntDesign  style={{alignSelf:'center'}} name='plus' size={22} color='black' /> */}
-          <SvgUri
+        {Platform.OS == 'ios'?  
+        <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/UploadVideo/add_products_icon.svg')}
                         />
+                        :
+          <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/UploadVideo/add_products_icon.png')}
+
+          />
+                  }
           </TouchableOpacity>
 
           </View>

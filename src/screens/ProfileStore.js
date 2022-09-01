@@ -12,7 +12,8 @@ import {
     TextInput,
     Image,
   Modal,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -172,10 +173,19 @@ const [sh, setsh]=useState(true)
       <View style={{paddingHorizontal:20,marginTop:15, flexDirection:'row', justifyContent:'space-between'}}>
           
           <View style={{flexDirection:'row', marginBottom:5}}>
+         {Platform.OS == 'ios'?
            <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Discovery/products_white_icon.svg')}
                         />
+                               :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Discovery/products_white_icon.png')}
+
+          />
+        }
                                       <Text style={{marginLeft:10,alignSelf:'center', fontSize:16, fontWeight:'500'}}>Products</Text>
             </View>
 
@@ -506,10 +516,19 @@ openMenu()              }}
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+  {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Login/go_live_icon.svg')}
     />
+           :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Login/go_live_icon.png')}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Livestreams</Text>
@@ -530,10 +549,19 @@ openMenu()              }}
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios'?
     <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Profile/catalogue_icon.svg')}
     />
+       :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Profile/catalogue_icon.png')}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Catalogue</Text>
@@ -547,6 +575,9 @@ openMenu()              }}
    
 
    </TouchableOpacity>
+
+
+{/*    
    <TouchableOpacity 
    onPress={()=> {navigation.navigate('ProfileSecond')}}
    style={{borderColor:'#E3E3EB',marginTop:0, flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1, height:60,paddingHorizontal:15, width:'100%'}}>
@@ -569,7 +600,7 @@ openMenu()              }}
     </View>
    
 
-   </TouchableOpacity>
+   </TouchableOpacity> */}
       
 
 

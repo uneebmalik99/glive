@@ -115,11 +115,19 @@ useEffect(() => {
                     <TouchableOpacity onPress={()=> { settype1(0)}} style={{height:'100%',borderRadius:5, justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center',  backgroundColor:type1==0?'#E91327':'white', width:'40%'}}>
 
                       <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
+                     {Platform.OS == 'ios'?
                       <SvgUri
                           style={{alignSelf:'center',}}
                           source={type1== 1?  require('../images/gLive_Icons/CreateaStore/individual_icon.svg'): require('../images/gLive_Icons/CreateaStore/individual_white_icon.svg')}
                         />
+ :
+    <Image
+                                    style={{alignSelf:'center',}}
 
+                                    source={type1== 1?  require('../images/gLive_Icons/CreateaStore/individual_icon.png'): require('../images/gLive_Icons/CreateaStore/individual_white_icon.png')}
+
+          />
+        }
                     <Text style={{alignSelf:'center', color:type1==0?'white':'#162741', fontWeight:'400'}}>Individual</Text>
                       </View>
 
@@ -131,10 +139,20 @@ useEffect(() => {
                     style={{height:'100%',justifyContent:'center', borderWidth:1,borderColor:'#E3E3EB', alignSelf:'center', borderRadius:5, backgroundColor:type1==1?'#E91327':'white', width:'40%'}}>
                     
                     <View style={{height:'80%',width:'80%',paddingVertical:15, alignSelf:'center',justifyContent:'space-between', }}>
+                   {Platform.OS == 'ios'?
+
                     <SvgUri
                           style={{alignSelf:'center',}}
                           source={type1==0? require('../images/gLive_Icons/CreateaStore/business_icon.svg'): require('../images/gLive_Icons/CreateaStore/business_white_icon.svg')}
                         />
+                         :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={type1==0? require('../images/gLive_Icons/CreateaStore/business_icon.png'): require('../images/gLive_Icons/CreateaStore/business_white_icon.png')}
+
+          />
+        }
                     <Text style={{alignSelf:'center',color:type1== 0?'#162741':'white', fontWeight:'400'}}>Business</Text>
                       </View>
 
@@ -419,10 +437,19 @@ backgroundColor:'white',
                
                
                <View style={{width:'20%' ,}}>
+                 {Platform.OS == 'ios'?
                 <SvgUri
                           style={{alignSelf:'center',}}
                           source={type== 0 ?  require('../images/gLive_Icons/CreateaStore/owner_white_icon.svg'): require('../images/gLive_Icons/CreateaStore/owner_icon.svg')}
                         />
+                        :
+                        <Image
+                                                        style={{alignSelf:'center',}}
+                    
+                                                        source={type== 0 ?  require('../images/gLive_Icons/CreateaStore/owner_white_icon.png'): require('../images/gLive_Icons/CreateaStore/owner_icon.png')}
+                    
+                              />
+                            }
                 </View>
 
                 <View style={{width:'50%'}}>
@@ -462,10 +489,20 @@ backgroundColor:'white',
                
                
                <View style={{width:'20%' ,}}>
+                 {Platform.OS == 'ios'?
+
                 <SvgUri
                           style={{alignSelf:'center',}}
                           source={type== 1?  require('../images/gLive_Icons/CreateaStore/admin_white_icon.svg'): require('../images/gLive_Icons/CreateaStore/admin_icon.svg')}
                         />
+                        :
+                        <Image
+                                                        style={{alignSelf:'center',}}
+                    
+                                                        source={type== 1?  require('../images/gLive_Icons/CreateaStore/admin_white_icon.png'): require('../images/gLive_Icons/CreateaStore/admin_icon.png')}
+                    
+                              />
+                            }
                 </View>
 
                 <View style={{width:'50%'}}>

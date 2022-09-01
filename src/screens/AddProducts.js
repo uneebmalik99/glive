@@ -15,7 +15,8 @@ import {
     Keyboard,
     Modal,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -903,10 +904,18 @@ shadowRadius: 3.84,
 backgroundColor:'white',
 alignSelf:'flex-end',elevation:10, width:45,height:45, justifyContent:'center', borderRadius:400/2,color:'white',marginTop:-20,marginRight:-20, padding:5}}>
 {/* <Image  style={{width:30,height:30, alignSelf:'center',}} source={require('../images/camera_img.png')}/> */}
-<SvgUri
+{Platform.OS == 'ios'?
+  <SvgUri
                           style={{alignSelf:'center',}}
                           source={require('../images/gLive_Icons/Profile/change_profile_pic_icon.svg')}
-                        />
+                        />:
+                           <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Profile/change_profile_pic_icon.png')}
+
+          />
+        }
                         </View>
 
       </View>  
@@ -1048,12 +1057,15 @@ setItems={setItems}
       </View>
 
 
-<TouchableOpacity onPress={()=> {settimemodal(true)}} style={{borderWidth:1, width:'45%',borderRadius:5,marginTop:20, borderColor:'#E3E3EB', height:50,paddingHorizontal:10, flexDirection:'row', }}>
+<TouchableOpacity 
+// onPress={()=> {settimemodal(true)}}
+
+style={{borderWidth:1, width:'45%',borderRadius:5,marginTop:20, borderColor:'#E3E3EB', height:50,paddingHorizontal:10, flexDirection:'row', }}>
 
 
 
 
-    <Text style={{alignSelf:'center', fontSize:16, fontWeight:'400', color:'#7D8696'}}>00.00</Text>
+    <TextInput placeholder={'00.00'} style={{alignSelf:'center',  fontSize:16, fontWeight:'400', color:'#7D8696'}}></TextInput>
 
 
 </TouchableOpacity>

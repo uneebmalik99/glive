@@ -12,7 +12,8 @@ import {
     Image,
     Button,
     TextInput,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -81,10 +82,19 @@ const renderLivenow = ({ item, index }) => {
 
     <View style={{ width:'50%', flexDirection:'row', }}>
     <View style={{width:'20%',justifyContent:'center', }}>
+    {Platform.OS == 'ios' ?
     <SvgUri
       style={{alignSelf:'center'}}
       source={item.icon}
     />
+    :
+       <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={item.icon}
+
+          />
+        }
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>{item.name}</Text>
@@ -236,11 +246,20 @@ const renderLivenow = ({ item, index }) => {
         <TouchableOpacity style={{padding:20,marginTop:20, flexDirection:'row',width:'50%',borderWidth:1,borderRadius:5,borderColor:'#E3E3EB', justifyContent:'space-between'}}>
           
 
-        
+        {Platform.OS == 'ios'?
         <SvgUri
       style={{alignSelf:'center'}}
       source={require('../images/gLive_Icons/Settings/delete_account_icon.svg')}
           />
+          :
+          
+          <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={require('../images/gLive_Icons/Settings/delete_account_icon.png')}
+
+          />
+        }
 
           <Text StatusBar={{fontSize:16, fontWeight:'500'}}>Delete Account</Text>
         </TouchableOpacity>

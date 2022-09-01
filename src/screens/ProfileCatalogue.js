@@ -35,7 +35,6 @@ import { SliderBox } from "react-native-image-slider-box";
 import Appcolors from '../AppColors/Appcolors.js';
 import App from '../../App.js';
 import Icon from 'react-native-vector-icons'
-import SvgUri from 'react-native-svg-uri'; // SVG Package
 
 import RNPopover from 'react-native-popover-menu';
 
@@ -360,8 +359,9 @@ onRequestClose={() => {
        <View style={{flexDirection:'row', paddingHorizontal:20,marginTop:10,justifyContent:'space-between'}}>
        <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Products</Text>
 
+    <TouchableOpacity onPress={()=> {navigation.navigate('ProfileAddProduct')}}>
        <Text style={{alignSelf:'center',color:'#1C54DB', textAlign:'left', fontSize:18, fontWeight:'500', marginLeft:0,}}>+ Add</Text>
-
+    </TouchableOpacity>
          </View>
 
             

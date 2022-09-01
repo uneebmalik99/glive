@@ -12,7 +12,8 @@ import {
     TextInput,
     Image,
     Button,
-    SafeAreaView
+    SafeAreaView,
+    Platform
 } from 'react-native';
 import AppConstance, {
     deviceHeight,
@@ -46,7 +47,8 @@ const Setting = ({route ,navigation }) => {
       name:'Become a Business',
       icon:require('../images/gLive_Icons/Settings/businesssettingsicon.svg'),
       // page:'BecomeaBusiness',
-      page:'BecomeaBusinessnostore'
+      // page:'BecomeaBusinessnostore'
+      page:'BecomeaBusinessnostore',
 
     },
     {
@@ -85,7 +87,7 @@ const Setting = ({route ,navigation }) => {
       name:'Business Settings',
       icon:require('../images/gLive_Icons/Settings/businesssettingsicon.svg'),
       // page:'BecomeaBusiness',
-      page:'BecomeaBusinessnostore'
+      page:'BecomeaBusiness'
 
     },
     {
@@ -134,6 +136,7 @@ const renderLivenow = ({ item, index }) => {
       style={{alignSelf:'center'}}
       source={item.icon}
     />
+  
     </View>
       <View style={{marginLeft:15, justifyContent:'center'}}>
       <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>{item.name}</Text>
@@ -169,7 +172,7 @@ const renderLivenow = ({ item, index }) => {
 <Text></Text>
 </View>
   </Appbar>
-
+  <ScrollView>
 
   <FlatList
          contentInsetAdjustmentBehavior="automatic"
@@ -180,7 +183,54 @@ const renderLivenow = ({ item, index }) => {
          keyExtractor={(item,id) => id.toString()}
          /> 
 
-         <ScrollView>
+<TouchableOpacity 
+   style={{borderColor:'#E3E3EB',flexDirection:'row',justifyContent:'space-between', borderRadius:5,borderBottomWidth:1,height:60,paddingHorizontal:15, width:'100%'}}>
+
+    <View style={{ width:'50%',marginLeft:5, flexDirection:'row', }}>
+    <View style={{width:'20%',justifyContent:'center', }}>
+    <SvgUri
+      style={{alignSelf:'center'}}
+      source={require('../images/gLive_Icons/log_out_icon.svg')}
+    />
+    {/* {Platform.OS == 'ios'?
+    <SvgUri
+      style={{alignSelf:'center'}}
+      source={item.icon}
+    />
+     :
+    <Image
+                                    style={{alignSelf:'center',}}
+
+                                    source={item.icon}
+
+          />
+        } */}
+    </View>
+      <View style={{marginLeft:15, justifyContent:'center'}}>
+      <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Logout</Text>
+    </View>
+    </View>
+
+
+    <View style={{justifyContent:'center'}}>
+    </View>
+   
+
+   </TouchableOpacity>
+{/* <TouchableOpacity 
+   style={{borderColor:'#E3E3EB',flexDirection:'row',justifyContent:'center',alignContent:'flex-start', borderRadius:5,borderBottomWidth:1,height:60,paddingHorizontal:15, width:'100%'}}>
+  
+   
+      <View style={{marginLeft:15, justifyContent:'center'}}>
+      <Text style={{alignSelf:'center',textAlign:'left', fontSize:16, fontWeight:'500', marginLeft:0,}}>Log Out</Text>
+    </View>
+
+
+   
+
+   </TouchableOpacity> */}
+
+
 
 
 
